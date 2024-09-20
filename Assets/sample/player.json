@@ -1,0 +1,14 @@
+{
+  "frames": {},
+  "meta": {
+    "app": "sprite-sheet-to-json",
+    "version": "1.0.0",
+    "image": "player.jpg",
+    "format": "RGBA8888",
+    "size": {
+      "w": 6000,
+      "h": 3000
+    },
+    "scale": "1"
+  }
+}

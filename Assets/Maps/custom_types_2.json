@@ -1,0 +1,216 @@
+[
+    {
+        "color": "#ffa0a0a4",
+        "drawFill": true,
+        "id": 8,
+        "members": [
+            {
+                "name": "faint_location",
+                "type": "string",
+                "value": ""
+            },
+            {
+                "name": "id",
+                "type": "int",
+                "value": -1
+            }
+        ],
+        "name": "area_metadata",
+        "type": "class",
+        "useAs": [
+            "property",
+            "map",
+            "layer",
+            "object",
+            "tile",
+            "tileset",
+            "wangcolor",
+            "wangset"
+        ]
+    },
+    {
+        "color": "#ffa0a0a4",
+        "drawFill": true,
+        "id": 6,
+        "members": [
+            {
+                "name": "area",
+                "type": "int",
+                "value": 0
+            }
+        ],
+        "name": "encounter",
+        "type": "class",
+        "useAs": [
+            "property",
+            "map",
+            "layer",
+            "object",
+            "tile",
+            "tileset",
+            "wangcolor",
+            "wangset"
+        ]
+    },
+    {
+        "color": "#ffa0a0a4",
+        "drawFill": true,
+        "id": 5,
+        "members": [
+            {
+                "name": "connects_to",
+                "type": "string",
+                "value": ""
+            },
+            {
+                "name": "entrance_id",
+                "type": "string",
+                "value": ""
+            },
+            {
+                "name": "is_building",
+                "type": "bool",
+                "value": false
+            }
+        ],
+        "name": "entrance",
+        "type": "class",
+        "useAs": [
+            "property",
+            "map",
+            "layer",
+            "object",
+            "tile",
+            "tileset",
+            "wangcolor",
+            "wangset"
+        ]
+    },
+    {
+        "color": "#ffa0a0a4",
+        "drawFill": true,
+        "id": 9,
+        "members": [
+            {
+                "name": "id",
+                "type": "int",
+                "value": 0
+            },
+            {
+                "name": "item_id",
+                "type": "int",
+                "value": 0
+            }
+        ],
+        "name": "item",
+        "type": "class",
+        "useAs": [
+            "property",
+            "map",
+            "layer",
+            "object",
+            "tile",
+            "tileset",
+            "wangcolor",
+            "wangset"
+        ]
+    },
+    {
+        "color": "#ffa0a0a4",
+        "drawFill": true,
+        "id": 2,
+        "members": [
+            {
+                "name": "id",
+                "type": "int",
+                "value": 0
+            },
+            {
+                "name": "movement_pattern",
+                "propertyType": "npc_movement",
+                "type": "string",
+                "value": "IDLE"
+            }
+        ],
+        "name": "npc",
+        "type": "class",
+        "useAs": [
+            "property",
+            "map",
+            "layer",
+            "object",
+            "tile",
+            "tileset",
+            "wangcolor",
+            "wangset"
+        ]
+    },
+    {
+        "id": 7,
+        "name": "npc_action",
+        "storageType": "string",
+        "type": "enum",
+        "values": [
+            "NONE",
+            "TRADE",
+            "ITEM",
+            "HEAL",
+            "BATTLE"
+        ],
+        "valuesAsFlags": false
+    },
+    {
+        "id": 3,
+        "name": "npc_movement",
+        "storageType": "string",
+        "type": "enum",
+        "values": [
+            "CLOCKWISE",
+            "IDLE"
+        ],
+        "valuesAsFlags": false
+    },
+    {
+        "color": "#ffa0a0a4",
+        "drawFill": true,
+        "id": 1,
+        "members": [
+        ],
+        "name": "npc_path",
+        "type": "class",
+        "useAs": [
+            "property",
+            "map",
+            "layer",
+            "object",
+            "tile",
+            "tileset",
+            "wangcolor",
+            "wangset"
+        ]
+    },
+    {
+        "color": "#ffa0a0a4",
+        "drawFill": true,
+        "id": 4,
+        "members": [
+            {
+                "name": "message",
+                "type": "string",
+                "value": ""
+            }
+        ],
+        "name": "sign",
+        "type": "class",
+        "useAs": [
+            "property",
+            "map",
+            "layer",
+            "object",
+            "tile",
+            "tileset",
+            "wangcolor",
+            "wangset"
+        ]
+    }
+]

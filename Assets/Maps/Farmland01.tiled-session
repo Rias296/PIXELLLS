@@ -1,0 +1,46 @@
+{
+    "activeFile": "",
+    "expandedProjectPaths": [
+    ],
+    "file.lastUsedOpenFilter": "All Files (*)",
+    "fileStates": {
+        "": {
+            "scaleInDock": 1
+        },
+        "Farmland-01.json#Ruin_Terrain1": {
+            "dynamicWrapping": false
+        },
+        "Farmland-01.json#Thoughtful": {
+            "dynamicWrapping": false
+        },
+        "Farmland-01.tmx": {
+            "scale": 0.39662499999999995,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 799.2436180271037,
+                "y": 800.5042546485977
+            }
+        },
+        "Hill.tsx": {
+            "dynamicWrapping": false
+        },
+        "Tilled_Dirt.tsx": {
+            "dynamicWrapping": true
+        }
+    },
+    "last.exportedFilePath": "C:/Users/demon/OneDrive/Desktop/PIXEL5/src/dist/Assets/Maps",
+    "last.imagePath": "C:/Users/demon/OneDrive/Desktop/PIXEL5/src/dist/Assets/Boss/Witch/Sprites",
+    "last.objectTypesPath": "C:/Users/demon/OneDrive/Desktop/PIXEL5/src/dist/Assets/Maps/custom_types.json",
+    "map.lastUsedExportFilter": "JSON map files (*.tmj *.json)",
+    "map.lastUsedFormat": "json",
+    "openFiles": [
+    ],
+    "project": "Farmland01.tiled-project",
+    "recentFiles": [
+    ],
+    "tileset.embedInMap": true,
+    "tileset.tileSize": {
+        "height": 16,
+        "width": 16
+    }
+}
