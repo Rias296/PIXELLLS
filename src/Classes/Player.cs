@@ -1,6 +1,7 @@
 using Godot;
 using System;
 
+
 public class Player : Sprite
 {
 	// Declare member variables here. Examples:
@@ -17,7 +18,7 @@ public class Player : Sprite
 	public override void _Process(float delta)
  {	
 	float AMOUNT =5;
-     if (Input.IsKeyPressed((int)KeyList.W)){
+	 if (Input.IsKeyPressed((int)KeyList.W)){
 		this.Position += new Vector2(0,-AMOUNT);
 	 }
 	 if (Input.IsKeyPressed((int)KeyList.S)){

@@ -21,6 +21,7 @@ _global_script_class_icons={
 [application]
 
 config/name="PIXELLLS"
+run/main_scene="res://Player/Player.tscn"
 config/icon="res://icon.png"
 
 [editor]
