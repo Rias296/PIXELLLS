@@ -3,20 +3,41 @@ using System;
 
 public class Assassin : KinematicBody2D
 {
-	
-	// Declare member variables here. Examples:
-	// private int a = 2;
-	// private string b = "text";
+    public int Speed = 250;
+    private Vector2 _velocity = new Vector2();
+   
+    public void GetInput()
+    {
+        _velocity = new Vector2();
+        
+        if (Input.IsKeyPressed((int)KeyList.D))
+        {
+            _velocity.x += 1;
+        }
+        if (Input.IsKeyPressed((int)KeyList.A))
+        {
+            _velocity.x -= 1;
+        }
+        if (Input.IsKeyPressed((int)KeyList.S))
+        {
+            _velocity.y += 1;
+        }
+        if (Input.IsKeyPressed((int)KeyList.W))
+        {
+            _velocity.y -= 1;
+        }
+        
+        // Normalize to avoid faster diagonal movement
+        if (_velocity.Length() > 0)
+        {
+            _velocity = _velocity.Normalized();
+        }
+    }
 
-	// Called when the node enters the scene tree for the first time.
-	public override void _Ready()
-	{
-		
-	}
-
-//  // Called every frame. 'delta' is the elapsed time since the previous frame.
-//  public override void _Process(float delta)
-//  {
-//      
-//  }
+    public override void _PhysicsProcess(float delta)
+    {
+        GetInput();
+        // Use MoveAndSlide for proper movement with collisions and sliding
+        MoveAndSlide(_velocity * Speed);
+    }
 }
