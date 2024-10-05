@@ -1,8 +1,24 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://src/Player.cs" type="Script" id=1]
+[ext_resource path="res://src/Classes/Player.cs" type="Script" id=1]
 [ext_resource path="res://Assets/Player/Idle/sprite_Idle0.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Maps/Farmland-01.png" type="Texture" id=3]
 
 [node name="Player" type="Sprite"]
+position = Vector2( 12, 24 )
+scale = Vector2( 0.385742, 0.464844 )
 texture = ExtResource( 2 )
 script = ExtResource( 1 )
+
+[node name="Camera" type="Camera2D" parent="."]
+position = Vector2( 158, -65 )
+current = true
+smoothing_enabled = true
+
+[node name="TextureRect" type="TextureRect" parent="."]
+margin_left = -1757.65
+margin_top = 1264.94
+margin_right = 6750.35
+margin_bottom = 3965.94
+texture = ExtResource( 3 )
+stretch_mode = 2
