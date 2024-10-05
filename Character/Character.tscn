@@ -1,0 +1,25 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Assets/Assassin/Assassin.png" type="Texture" id=2]
+
+[sub_resource type="CircleShape2D" id=2]
+radius = 15.6205
+
+[node name="Character" type="KinematicBody2D"]
+position = Vector2( 5, -39 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+
+[node name="Tween" type="Tween" parent="."]
+
+[node name="PIvot" type="Position2D" parent="."]
+position = Vector2( 233, 282 )
+
+[node name="Assassin_Image" type="Sprite" parent="PIvot"]
+visible = false
+position = Vector2( -234, -188 )
+texture = ExtResource( 2 )
+
+[node name="CollisionShape" type="CollisionShape2D" parent="."]
+position = Vector2( 0, 93 )
+shape = SubResource( 2 )

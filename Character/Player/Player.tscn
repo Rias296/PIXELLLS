@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Character/Character.tscn" type="PackedScene" id=1]
+[ext_resource path="res://src/Classes/Characters/Assassin.cs" type="Script" id=2]
+
+[node name="Player" instance=ExtResource( 1 )]
+script = ExtResource( 2 )
+
+[node name="Assassin_Image" parent="PIvot" index="0"]
+visible = true
+position = Vector2( -236, -242 )
+
+[node name="CollisionShape" parent="." index="3"]
+position = Vector2( -3, 39 )
+rotation = -0.0592611

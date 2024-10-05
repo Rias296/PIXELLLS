@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=2]
 
-[ext_resource path="res://Player/Player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Character/Player.tscn" type="PackedScene" id=1]
 
 [node name="TestMap" type="Node2D"]
 
@@ -10,5 +10,5 @@
 remote_path = NodePath("../../Camera2D")
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2( 62, 268 )
+position = Vector2( 12, 24 )
 scale = Vector2( 0.385742, 0.464844 )
