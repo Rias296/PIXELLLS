@@ -2,6 +2,7 @@ using Godot;
 using System;
 
 
+
 public class Player : Sprite
 {
 	// Declare member variables here. Examples:
@@ -17,18 +18,18 @@ public class Player : Sprite
 //  // Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(float delta)
  {	
-	float AMOUNT =5;
+	
 	 if (Input.IsKeyPressed((int)KeyList.W)){
-		this.Position += new Vector2(0,-AMOUNT);
+		this.Position += new Vector2(0,-Player_Constant.MOVEMENT_SPEED);
 	 }
 	 if (Input.IsKeyPressed((int)KeyList.S)){
-		this.Position += new Vector2(0,AMOUNT);
+		this.Position += new Vector2(0,Player_Constant.MOVEMENT_SPEED);
 	 }
 	 if (Input.IsKeyPressed((int)KeyList.A)){
-		this.Position += new Vector2(-AMOUNT,0);
+		this.Position += new Vector2(-Player_Constant.MOVEMENT_SPEED,0);
 	 }
 	 if (Input.IsKeyPressed((int)KeyList.D)){
-		this.Position += new Vector2(AMOUNT,0);
+		this.Position += new Vector2(Player_Constant.MOVEMENT_SPEED,0);
 	 }
  }
 }

@@ -1,3 +1,3 @@
 public class Player_Constant{
-    float MOVEMENT_SPEED;
+    public static float MOVEMENT_SPEED = 5;
 }
