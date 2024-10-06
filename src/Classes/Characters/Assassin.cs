@@ -2,14 +2,18 @@ using Godot;
 using System;
 
 
-public class Assassin : KinematicBody2D
+public class Assassin : Character
 {
-	public int Speed = 250;
 	private Vector2 _velocity = new Vector2();
    
-	public Character character = new Character();
-	
-	public void GetInput()
+	public override void _Ready()
+    {
+        base._Ready();  // Call the Character's _Ready method to initialize nodes
+    }
+
+    
+
+	public void GetInput(float delta)
 	{
 		_velocity = new Vector2();
 		
@@ -38,9 +42,11 @@ public class Assassin : KinematicBody2D
 	}
 
 	public override void _PhysicsProcess(float delta)
-	{
-		GetInput();
-		// Use MoveAndSlide for proper movement with collisions and sliding
-		MoveAndSlide(_velocity * Speed);
-	}
+    {
+        GetInput(delta);  // Handle specific player input
+        base._PhysicsProcess(delta);  // Call the Character's physics logic (state management, animation)
+		_velocity = MoveAndSlide(_velocity * Character_Constant.MOVEMENT_SPEED);
+    }
+
+
 }
