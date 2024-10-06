@@ -11,12 +11,19 @@ public class Character : KinematicBody2D
     private CollisionShape2D _collisionShape;
     private enum States {IDLE, MOVE};
     private States current_state = States.IDLE;
-    
+    protected StateMachine<string> _stateMachine;
 
     public override void _Ready()
     {
-        _animatedSprite = GetNode<AnimatedSprite>("Assassin_Idle");
-        _collisionShape = GetNode<CollisionShape2D>("CollisionShape");
+        // Initialize state machine
+        _stateMachine = new StateMachine<string>();
+
+        // Add states to the state machine
+        _stateMachine.AddState(States.IDLE.ToString());
+        _stateMachine.AddState(States.MOVE.ToString());
+
+        // Set the default state to Idle
+        _stateMachine.ChangeState(States.IDLE.ToString());
     }
 
     public override void _PhysicsProcess(float delta)
@@ -26,22 +33,16 @@ public class Character : KinematicBody2D
         UpdateAnimation();
     }
 
-    private void ChangeState(States new_state)
-    {
-        if(current_state != new_state){
-            current_state = new_state;
-            GD.Print("State Changed into: " + new_state);
-        }
-    }
     private void UpdateState(){
 
-        if(IsOnFloor()){
-            if(_velocity.x ==0){
-                ChangeState(States.IDLE);
-            }
-            else{
-                ChangeState(States.MOVE);
-            }
+        // If character is not moving, set state to Idle
+        if (_velocity.Length() == 0)
+        {
+            _stateMachine.ChangeState(States.IDLE.ToString());
+        }
+        else
+        {
+            _stateMachine.ChangeState(States.MOVE.ToString());
         }
     }
 
@@ -57,5 +58,13 @@ public class Character : KinematicBody2D
         }
     }
     
-   
+   public bool IsIdle()
+    {
+        return _stateMachine.IsInState(States.IDLE.ToString());
+    }
+
+    public bool IsMoving()
+    {
+        return _stateMachine.IsInState(States.MOVE.ToString());
+    }
 }
