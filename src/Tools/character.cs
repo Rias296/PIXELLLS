@@ -11,7 +11,7 @@ public class Character : KinematicBody2D
     private CollisionShape2D _collisionShape;
     private enum States {IDLE, MOVE};
     private States current_state = States.IDLE;
-    private States new_state;
+    
 
     public override void _Ready()
     {
@@ -26,14 +26,21 @@ public class Character : KinematicBody2D
         UpdateAnimation();
     }
 
+    private void ChangeState(States new_state)
+    {
+        if(current_state != new_state){
+            current_state = new_state;
+            GD.Print("State Changed into: " + new_state);
+        }
+    }
     private void UpdateState(){
 
         if(IsOnFloor()){
             if(_velocity.x ==0){
-                current_state = States.IDLE;
+                ChangeState(States.IDLE);
             }
             else{
-                current_state = States.MOVE;
+                ChangeState(States.MOVE);
             }
         }
     }
@@ -46,7 +53,7 @@ public class Character : KinematicBody2D
             case States.MOVE:
                 _animatedSprite.Play("run");
                 break;
-                
+
         }
     }
     

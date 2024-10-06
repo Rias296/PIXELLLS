@@ -1,11 +1,14 @@
 using Godot;
 using System;
 
+
 public class Assassin : KinematicBody2D
 {
 	public int Speed = 250;
 	private Vector2 _velocity = new Vector2();
    
+	public Character character = new Character();
+	
 	public void GetInput()
 	{
 		_velocity = new Vector2();
