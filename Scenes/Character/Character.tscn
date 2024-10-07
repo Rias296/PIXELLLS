@@ -1,6 +1,6 @@
 [gd_scene load_steps=16 format=2]
 
-[ext_resource path="res://src/Tools/character.cs" type="Script" id=1]
+[ext_resource path="res://src/Tools/Character.cs" type="Script" id=1]
 [ext_resource path="res://Assets/Assassin/Assassin.png" type="Texture" id=2]
 [ext_resource path="res://Assets/Player/WalkingRight/Walking_Right-anims.png" type="Texture" id=3]
 [ext_resource path="res://Assets/Assassin/Assassin-Idle Sheet.png" type="Texture" id=4]
@@ -76,7 +76,7 @@ visible = false
 position = Vector2( -234, -188 )
 texture = ExtResource( 2 )
 
-[node name="AnimatedSprite" type="AnimatedSprite" parent="Pivot"]
+[node name="Character_Animation" type="AnimatedSprite" parent="Pivot"]
 position = Vector2( 8.25, 17.25 )
 scale = Vector2( 0.0705128, 0.0506374 )
 frames = SubResource( 12 )
