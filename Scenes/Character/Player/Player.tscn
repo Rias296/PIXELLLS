@@ -1,6 +1,6 @@
 [gd_scene load_steps=12 format=2]
 
-[ext_resource path="res://Character/Character.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Scenes/Character/Character.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/Classes/Characters/Assassin.cs" type="Script" id=2]
 [ext_resource path="res://Assets/Assassin/Assassin-Idle Sheet.png" type="Texture" id=3]
 
@@ -45,19 +45,19 @@ script = ExtResource( 2 )
 [node name="AnimationPlayer" parent="." index="0"]
 anims/Idle = SubResource( 1 )
 
-[node name="Assassin_Idle" type="AnimatedSprite" parent="." index="2"]
-position = Vector2( 5, 40 )
+[node name="Assassin_Idle" type="AnimatedSprite" parent="PIvot" index="0"]
+position = Vector2( -228, -242 )
 frames = SubResource( 8 )
 animation = "Idle"
 
-[node name="Assassin_Image" parent="PIvot" index="0"]
+[node name="Assassin_Image" parent="PIvot" index="1"]
 position = Vector2( -228, -242 )
 
-[node name="CollisionShape" parent="." index="4"]
+[node name="CollisionShape" parent="." index="3"]
 position = Vector2( 5, 39 )
 rotation = -0.0592611
 
-[node name="Camera2D" type="Camera2D" parent="." index="5"]
+[node name="Camera2D" type="Camera2D" parent="." index="4"]
 position = Vector2( 27, 37 )
 current = true
 drag_margin_left = 0.08

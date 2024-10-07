@@ -8,12 +8,12 @@ public class Assassin : Character
 	private AnimatedSprite _animatedSprite;
    
 	public override void _Ready()
-    {
-        base._Ready();  // Call the Character's _Ready method to initialize nodes
+	{
+		base._Ready();  // Call the Character's _Ready method to initialize nodes
 		_animatedSprite = GetNode<AnimatedSprite>("Assassin_Animation");
-    }
+	}
 
-    
+	
 
 	public void GetInput(float delta)
 	{
@@ -44,11 +44,11 @@ public class Assassin : Character
 	}
 
 	public override void _PhysicsProcess(float delta)
-    {
-        GetInput(delta);  // Handle specific player input
-        base._PhysicsProcess(delta);  // Call the Character's physics logic (state management, animation)
+	{
+		GetInput(delta);  // Handle specific player input
+		base._PhysicsProcess(delta);  // Call the Character's physics logic (state management, animation)
 		_velocity = MoveAndSlide(_velocity * Character_Constant.MOVEMENT_SPEED);
-    }
+	}
 
 
 }
