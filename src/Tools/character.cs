@@ -11,19 +11,19 @@ public class Character : KinematicBody2D
 	private CollisionShape2D _collisionShape;
 	private enum States {IDLE, MOVE};
 	private States current_state = States.IDLE;
-	protected StateMachine<string> _stateMachine;
+	protected StateMachine _stateMachine;
 
 	public override void _Ready()
 	{
 		// Initialize state machine
-		_stateMachine = new StateMachine<string>();
+		_stateMachine = new StateMachine();
 
 		// Add states to the state machine
-		_stateMachine.AddState(States.IDLE.ToString());
-		_stateMachine.AddState(States.MOVE.ToString());
+		_stateMachine.AddState(Character_Constant.CharacterStates.IDLE);
+		_stateMachine.AddState(Character_Constant.CharacterStates.MOVING);
 
 		// Set the default state to Idle
-		_stateMachine.ChangeState(States.IDLE.ToString());
+		_stateMachine.ChangeState(Character_Constant.CharacterStates.IDLE);
 
 		//Set AnimatedSprite to avoid Null Error
 		_animatedSprite = GetNode<AnimatedSprite>("./Pivot/Character_Animation");
@@ -46,11 +46,11 @@ public class Character : KinematicBody2D
 		// If character is not moving, set state to Idle
 		if (_velocity.Length() == 0)
 		{
-			_stateMachine.ChangeState(States.IDLE.ToString());
+			_stateMachine.ChangeState(Character_Constant.CharacterStates.IDLE);
 		}
 		else
 		{
-			_stateMachine.ChangeState(States.MOVE.ToString());
+			_stateMachine.ChangeState(Character_Constant.CharacterStates.MOVING);
 		}
 	}
 
@@ -68,11 +68,11 @@ public class Character : KinematicBody2D
 	
    public bool IsIdle()
 	{
-		return _stateMachine.IsInState(States.IDLE.ToString());
+		return _stateMachine.IsInState(Character_Constant.CharacterStates.IDLE);
 	}
 
 	public bool IsMoving()
 	{
-		return _stateMachine.IsInState(States.MOVE.ToString());
+		return _stateMachine.IsInState(Character_Constant.CharacterStates.MOVING);
 	}
 }
