@@ -22,7 +22,7 @@ _global_script_class_icons={
 
 config/name="PIXELLLS"
 run/main_scene="res://Scenes/Character/Player/Player.tscn"
-config/icon="res://icon.png"
+config/icon="res://Assets/Assassin/Assassin.png"
 
 [editor]
 

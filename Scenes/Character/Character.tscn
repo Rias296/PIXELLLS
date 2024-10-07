@@ -77,6 +77,7 @@ position = Vector2( -234, -188 )
 texture = ExtResource( 2 )
 
 [node name="Character_Animation" type="AnimatedSprite" parent="Pivot"]
+visible = false
 position = Vector2( 8.25, 17.25 )
 scale = Vector2( 0.0705128, 0.0506374 )
 frames = SubResource( 12 )

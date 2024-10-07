@@ -40,15 +40,19 @@ animations = [ {
 } ]
 
 [node name="Player" instance=ExtResource( 1 )]
+position = Vector2( -6, -40 )
 script = ExtResource( 2 )
 
 [node name="AnimationPlayer" parent="." index="0"]
 anims/Idle = SubResource( 1 )
 
 [node name="Assassin_Animation" type="AnimatedSprite" parent="Pivot" index="0"]
-position = Vector2( -222, -280 )
+position = Vector2( 10, -1 )
 frames = SubResource( 8 )
 animation = "Idle"
+
+[node name="Character_Animation" parent="Pivot" index="2"]
+visible = false
 
 [node name="Camera2D" type="Camera2D" parent="." index="3"]
 position = Vector2( 27, 37 )
