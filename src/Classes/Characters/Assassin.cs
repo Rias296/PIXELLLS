@@ -46,7 +46,7 @@ public class Assassin : Character
 	public override void _PhysicsProcess(float delta)
 	{
 		GetInput(delta);  // Handle specific player input
-		base._PhysicsProcess(delta);  // Call the Character's physics logic (state management, animation)
+		
 		_velocity = MoveAndSlide(_velocity * Character_Constant.MOVEMENT_SPEED);
 	}
 
