@@ -24,6 +24,13 @@ public class Character : KinematicBody2D
 
 		// Set the default state to Idle
 		_stateMachine.ChangeState(States.IDLE.ToString());
+
+        //Set AnimatedSprite to avoid Null Error
+        _animatedSprite = GetNode<AnimatedSprite>("./Pivot/Character_Animation");
+        if (_animatedSprite == null)
+        {
+            GD.PrintErr("AnimatedSprite not found!");
+        }
 	}
 
 	public override void _PhysicsProcess(float delta)
