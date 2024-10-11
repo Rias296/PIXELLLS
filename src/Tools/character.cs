@@ -38,6 +38,7 @@ public class Character : KinematicBody2D
 		
 		UpdateState();
 		UpdateAnimation();
+        UpdateHorizontalDirection();
 		GD.Print(_stateMachine);
 	}
 
@@ -46,12 +47,12 @@ public class Character : KinematicBody2D
 		// If character is not moving, set state to Idle
 		if (_velocity.Length() == 0)
 		{
-            GD.Print("State Changed to Idle");
+			GD.Print("State Changed to Idle");
 			_stateMachine.ChangeState(Character_Constant.CharacterStates.IDLE);
 		}
 		else
 		{
-            GD.Print("State changed to moving");
+			GD.Print("State changed to moving");
 			_stateMachine.ChangeState(Character_Constant.CharacterStates.MOVING);
 		}
 	}
@@ -67,6 +68,15 @@ public class Character : KinematicBody2D
 
 		}
 	}
+
+    private void UpdateHorizontalDirection(){
+        if (_velocity.x > 0 ){
+            _animatedSprite.FlipH = false;
+        }
+        if (_velocity.x < 0){
+            _animatedSprite.FlipH = true;
+        }
+    }
 	
    public bool IsIdle()
 	{
