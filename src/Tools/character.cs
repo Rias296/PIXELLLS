@@ -38,7 +38,7 @@ public class Character : KinematicBody2D
 		
 		UpdateState();
 		UpdateAnimation();
-        UpdateHorizontalDirection();
+		
 		GD.Print(_stateMachine);
 	}
 
@@ -69,14 +69,7 @@ public class Character : KinematicBody2D
 		}
 	}
 
-    private void UpdateHorizontalDirection(){
-        if (_velocity.x > 0 ){
-            _animatedSprite.FlipH = false;
-        }
-        if (_velocity.x < 0){
-            _animatedSprite.FlipH = true;
-        }
-    }
+
 	
    public bool IsIdle()
 	{

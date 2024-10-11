@@ -48,6 +48,16 @@ public class Assassin : Character
 		GetInput(delta);  // Handle specific player input
 		
 		_velocity = MoveAndSlide(_velocity * Character_Constant.MOVEMENT_SPEED);
+		UpdateHorizontalDirection();
+	}
+
+		private void UpdateHorizontalDirection(){
+		if (_velocity.x > 0 ){
+			_animatedSprite.FlipH = false;
+		}
+		if (_velocity.x < 0){
+			_animatedSprite.FlipH = true;
+		}
 	}
 
 
