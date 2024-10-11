@@ -4,7 +4,7 @@ using System;
 
 public class Assassin : Character
 {
-	private Vector2 _velocity = new Vector2();
+	
 	private AnimatedSprite _animatedSprite;
    
 	public override void _Ready()
@@ -47,7 +47,7 @@ public class Assassin : Character
 	{
 		//Calls the base node of Character Class
 		base._PhysicsProcess(delta);
-		
+
 		GetInput(delta);  // Handle specific player input
 		
 		_velocity = MoveAndSlide(_velocity * Character_Constant.MOVEMENT_SPEED);

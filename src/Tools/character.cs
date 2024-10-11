@@ -4,7 +4,7 @@ using System.Text.RegularExpressions;
 
 public class Character : KinematicBody2D
 {
-	private Vector2 _velocity = new Vector2();
+	protected Vector2 _velocity = new Vector2();
 
 
 	private AnimatedSprite _animatedSprite;
