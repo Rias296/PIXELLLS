@@ -50,9 +50,13 @@ anims/Idle = SubResource( 1 )
 position = Vector2( 10, -1 )
 frames = SubResource( 8 )
 animation = "Idle"
+speed_scale = 2.0
+playing = true
 
 [node name="Character_Animation" parent="Pivot" index="2"]
 visible = false
+position = Vector2( 10, 0 )
+playing = true
 
 [node name="Camera2D" type="Camera2D" parent="." index="3"]
 position = Vector2( 27, 37 )

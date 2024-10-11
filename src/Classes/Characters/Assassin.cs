@@ -10,7 +10,7 @@ public class Assassin : Character
 	public override void _Ready()
 	{
 		base._Ready();  // Call the Character's _Ready method to initialize nodes
-		_animatedSprite = GetNode<AnimatedSprite>("./Pivot/Assassin_Animation");
+		_animatedSprite = GetNode<AnimatedSprite>("./Pivot/Character_Animation");
 	}
 
 	
