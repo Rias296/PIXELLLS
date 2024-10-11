@@ -15,7 +15,7 @@ anims/Idle = SubResource( 1 )
 
 [node name="Character_Animation" parent="Pivot" index="1"]
 position = Vector2( 10, 0 )
-playing = true
+frame = 5
 
 [node name="Camera2D" type="Camera2D" parent="." index="3"]
 position = Vector2( 27, 37 )
