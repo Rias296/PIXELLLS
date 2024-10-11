@@ -21,19 +21,19 @@ public class Assassin : Character
 		
 		if (Input.IsKeyPressed((int)KeyList.D))
 		{
-			_velocity.x += 1;
+			_velocity.x += Character_Constant.MOVEMENT_SPEED;
 		}
 		if (Input.IsKeyPressed((int)KeyList.A))
 		{
-			_velocity.x -= 1;
+			_velocity.x -= Character_Constant.MOVEMENT_SPEED;
 		}
 		if (Input.IsKeyPressed((int)KeyList.S))
 		{
-			_velocity.y += 1;
+			_velocity.y += Character_Constant.MOVEMENT_SPEED;
 		}
 		if (Input.IsKeyPressed((int)KeyList.W))
 		{
-			_velocity.y -= 1;
+			_velocity.y -= Character_Constant.MOVEMENT_SPEED;
 		}
 		
 		// Normalize to avoid faster diagonal movement
