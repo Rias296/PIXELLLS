@@ -46,10 +46,12 @@ public class Character : KinematicBody2D
 		// If character is not moving, set state to Idle
 		if (_velocity.Length() == 0)
 		{
+            GD.Print("State Changed to Idle");
 			_stateMachine.ChangeState(Character_Constant.CharacterStates.IDLE);
 		}
 		else
 		{
+            GD.Print("State changed to moving");
 			_stateMachine.ChangeState(Character_Constant.CharacterStates.MOVING);
 		}
 	}
