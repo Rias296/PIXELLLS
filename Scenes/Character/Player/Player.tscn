@@ -1,0 +1,31 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Scenes/Character/Character.tscn" type="PackedScene" id=1]
+[ext_resource path="res://src/Classes/Characters/Assassin.cs" type="Script" id=2]
+
+[sub_resource type="Animation" id=1]
+resource_name = "Idle"
+
+[node name="Player" instance=ExtResource( 1 )]
+position = Vector2( -6, -40 )
+script = ExtResource( 2 )
+
+[node name="AnimationPlayer" parent="." index="0"]
+anims/Idle = SubResource( 1 )
+
+[node name="Character_Animation" parent="Pivot" index="1"]
+position = Vector2( 10, 0 )
+playing = true
+
+[node name="Camera2D" type="Camera2D" parent="." index="3"]
+position = Vector2( 27, 37 )
+current = true
+drag_margin_left = 0.08
+drag_margin_top = 0.05
+drag_margin_right = 0.0
+drag_margin_bottom = 0.07
+editor_draw_drag_margin = true
+
+[node name="CollisionShape" parent="." index="4"]
+position = Vector2( 5, 39 )
+rotation = -0.0592611

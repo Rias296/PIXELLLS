@@ -1,8 +1,0 @@
-[gd_scene load_steps=3 format=2]
-
-[ext_resource path="res://src/Player.cs" type="Script" id=1]
-[ext_resource path="res://Assets/Player/Idle/sprite_Idle0.png" type="Texture" id=2]
-
-[node name="Player" type="Sprite"]
-texture = ExtResource( 2 )
-script = ExtResource( 1 )

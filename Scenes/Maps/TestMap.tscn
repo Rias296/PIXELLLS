@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Scenes/Character/Player/Player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Assets/Maps/Farmland-01.png" type="Texture" id=2]
+
+[node name="TestMap" type="Node2D"]
+
+[node name="TextureRect" type="TextureRect" parent="."]
+margin_left = -522.0
+margin_top = -670.0
+margin_right = 1078.0
+margin_bottom = 930.0
+texture = ExtResource( 2 )
+
+[node name="Player" parent="." instance=ExtResource( 1 )]
