@@ -11,11 +11,14 @@ public class Client :Node
         var peer = new NetworkedMultiplayerENet();
         peer.CreateClient(ip, port);
         GetTree().NetworkPeer = peer;
+        GetTree().SetMeta(Multiplayer_Constants.NETWORK_PEER,peer);
 
          // Connect to MultiplayerAPI signals for network connection and disconnection
         GetTree().Connect("network_peer_connected", this, nameof(OnPlayerConnected));
         GetTree().Connect("network_peer_disconnected", this, nameof(OnPlayerDisconnected));
 
+        GetTree().IsNetworkServer();
+        GetTree().NetworkPeer = null;
     }
      // Called when a new player connects (including yourself)
     public void OnPlayerConnected(int peerId)

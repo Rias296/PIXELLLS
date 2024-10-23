@@ -9,6 +9,7 @@ public class Server : Node
         var peer = new NetworkedMultiplayerENet();
         peer.CreateServer(port);
         GetTree().NetworkPeer = peer;
+        GetTree().SetMeta(Multiplayer_Constants.NETWORK_PEER,peer);
 
            // Connect to MultiplayerAPI signals for player connections/disconnections
         GetTree().Connect("network_peer_connected", this, nameof(_OnPlayerConnected));
@@ -16,7 +17,8 @@ public class Server : Node
 
         GD.Print("Server started on port: " + port);
 
-        
+        GetTree().IsNetworkServer();
+        GetTree().NetworkPeer = null;
 
     }
 
