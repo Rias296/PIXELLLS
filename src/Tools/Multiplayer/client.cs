@@ -20,6 +20,10 @@ public class Client :Node
         GetTree().IsNetworkServer();
         GetTree().NetworkPeer = null;
     }
+
+
+
+
      // Called when a new player connects (including yourself)
     public void OnPlayerConnected(int peerId)
     {
