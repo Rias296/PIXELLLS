@@ -1,14 +1,22 @@
-[gd_scene format=2]
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Scenes/Main Menu/ClientButton.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Scenes/Main Menu/ServerButton.tscn" type="PackedScene" id=2]
+[ext_resource path="res://src/Classes/Characters/Menu Scenes/MainMenu.cs" type="Script" id=3]
 
 [node name="MainMenu" type="Control"]
 anchor_left = -0.419
-anchor_top = -0.318
-anchor_right = 0.581
+anchor_top = 0.083
+anchor_right = 0.659
 anchor_bottom = 0.682
-margin_left = 0.0560303
-margin_top = -0.199982
-margin_right = 0.0559692
-margin_bottom = -0.200012
+margin_left = 97.056
+margin_top = -212.8
+margin_right = 17.184
+margin_bottom = 27.8
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": true
+}
 
 [node name="Label" type="Label" parent="."]
 anchor_top = -0.033
@@ -21,16 +29,14 @@ text = "Are you a...."
 align = 1
 valign = 1
 
-[node name="ClientButton" type="Button" parent="."]
-margin_left = 785.0
-margin_top = 408.0
-margin_right = 834.0
-margin_bottom = 428.0
-text = "Client"
+[node name="ClientButton" parent="." instance=ExtResource( 1 )]
+margin_left = 736.0
+margin_top = 427.0
+margin_right = 785.0
+margin_bottom = 430.2
 
-[node name="ServerButton" type="Button" parent="."]
-margin_left = 716.0
-margin_top = 408.0
-margin_right = 768.0
-margin_bottom = 428.0
-text = "Server"
+[node name="ServerButton" parent="." instance=ExtResource( 2 )]
+margin_left = 798.0
+margin_top = 429.0
+margin_right = 810.0
+margin_bottom = 449.0
