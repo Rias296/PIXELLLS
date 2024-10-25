@@ -2,7 +2,7 @@
 
 [ext_resource path="res://Scenes/Main Menu/ClientButton.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Main Menu/ServerButton.tscn" type="PackedScene" id=2]
-[ext_resource path="res://src/Classes/Characters/Menu Scenes/MainMenu.cs" type="Script" id=3]
+[ext_resource path="res://src/Classes/Menu Scenes/MainMenu.cs" type="Script" id=3]
 
 [node name="MainMenu" type="Control"]
 anchor_left = -0.419
@@ -21,19 +21,19 @@ __meta__ = {
 [node name="Label" type="Label" parent="."]
 anchor_top = -0.033
 anchor_bottom = -0.033
-margin_left = 739.0
-margin_top = 407.8
-margin_right = 815.0
-margin_bottom = 421.8
+margin_left = 750.0
+margin_top = 417.8
+margin_right = 826.0
+margin_bottom = 431.8
 text = "Are you a...."
 align = 1
 valign = 1
 
 [node name="ClientButton" parent="." instance=ExtResource( 1 )]
-margin_left = 736.0
-margin_top = 427.0
-margin_right = 785.0
-margin_bottom = 430.2
+margin_left = 722.0
+margin_top = 429.0
+margin_right = 771.0
+margin_bottom = 432.2
 
 [node name="ServerButton" parent="." instance=ExtResource( 2 )]
 margin_left = 798.0

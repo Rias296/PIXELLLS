@@ -7,8 +7,8 @@ public class MainMenu : Control
 
 	public override void _Ready()
 	{
-		_clientButton = GetNode<Button>("ClientButton");
-		_serverButton = GetNode<Button>("ServerButton");
+		_clientButton = GetNode<Godot.Button>("ClientButton");
+		_serverButton = GetNode<Godot.Button>("ServerButton");
 		GD.Print(_clientButton.GetType());
 
 		if (_clientButton ==null){

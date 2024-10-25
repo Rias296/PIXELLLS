@@ -21,7 +21,7 @@ _global_script_class_icons={
 [application]
 
 config/name="PIXELLLS"
-run/main_scene="res://Scenes/Character/Player/Player.tscn"
+run/main_scene="res://Scenes/Main Menu/MainMenu.tscn"
 config/icon="res://Assets/Assassin/Assassin.png"
 
 [editor]
