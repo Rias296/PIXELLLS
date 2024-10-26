@@ -24,6 +24,10 @@ config/name="PIXELLLS"
 run/main_scene="res://Scenes/Main Menu/MainMenu.tscn"
 config/icon="res://Assets/Assassin/Assassin.png"
 
+[autoload]
+
+AuthenticationCredentials="*res://src/Tools/Multiplayer/AuthenticationCredentials.cs"
+
 [editor]
 
 version_control_autoload_on_startup=true

@@ -6,8 +6,14 @@ public class Client :Node
 
 	private Dictionary<int, PlayerData> otherPlayers = new Dictionary<int, PlayerData>();
 	private PlayerData localPlayer;
-	
-	public void ConnectToServer(string ip, int port){
+
+    public override void _Ready()
+    {
+        ConnectToServer(Multiplayer_Constants.IP_ADDRESS,Multiplayer_Constants.PORT);
+        base._Ready();
+    }
+
+    public void ConnectToServer(string ip, int port){
 		var peer = new NetworkedMultiplayerENet();
 		peer.CreateClient(ip, port);
 		GetTree().NetworkPeer = peer;

@@ -4,8 +4,18 @@ using System.Collections.Generic;
 public class Server : Node
 {
 	private Dictionary<int, PlayerData> connectedPlayers = new Dictionary<int, PlayerData>();
-	//Create server
-	public void StartServer(int port){
+
+    public override void _Ready()
+    {
+        StartServer(Multiplayer_Constants.PORT);
+        //_OnPlayerConnected();
+        
+
+
+    }
+
+    //Create server
+    public void StartServer(int port){
 		var peer = new NetworkedMultiplayerENet();
 		peer.CreateServer(port);
 		GetTree().NetworkPeer = peer;
