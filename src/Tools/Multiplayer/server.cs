@@ -1,30 +1,58 @@
 using Godot;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
+using System.IO;
+using File = System.IO.File;
 
 public class Server : Node
 {
 	private Dictionary<int, PlayerData> connectedPlayers = new Dictionary<int, PlayerData>();
+	private UDPServer server = new UDPServer();
+	private JObject database = new JObject();
+	private JObject loggedUsers = new JObject();
+	private string database_file_path = "./data/FakeData.json";
+	public override void _Ready()
+	{
+		StartServer(Multiplayer_Constants.PORT);
+		server.Listen((ushort)Multiplayer_Constants.PORT);
+		GD.Print("listening to server port");
+		//_OnPlayerConnected();
+		Load_database(database_file_path);
 
-    public override void _Ready()
-    {
-        StartServer(Multiplayer_Constants.PORT);
-        //_OnPlayerConnected();
-        
+	}
+
+	public override void _Process(float delta)
+	{
+		server.Poll();
+		if (server.IsConnectionAvailable()){
+			var peer = server.TakeConnection();
+			var message = JObject.Parse((string)peer.GetVar());
+			
+			if (message.ContainsKey("authenticate_credentials")){
+				Authenticate_Player(peer,message);
+			}
+			if (message.ContainsKey("get_authentication_token")){
+				GetAuthenticationToken(peer,message);
+			}
+			if (message.ContainsKey("get_avatar")){
+				GetAvatar(peer,message);
+			}
+	}
+}
 
 
-    }
 
-    //Create server
-    public void StartServer(int port){
+	//Create server
+	public void StartServer(int port){
 		var peer = new NetworkedMultiplayerENet();
 		peer.CreateServer(port);
 		GetTree().NetworkPeer = peer;
 		GetTree().SetMeta(Multiplayer_Constants.NETWORK_PEER,peer);
 
 		   // Connect to MultiplayerAPI signals for player connections/disconnections
-		GetTree().Connect("network_peer_connected", this, nameof(_OnPlayerConnected));
-		GetTree().Connect("network_peer_disconnected", this, nameof(_OnPlayerDisconnected));
-
+		
 		GD.Print("Server started on port: " + port);
 
 		GetTree().IsNetworkServer();
@@ -32,58 +60,85 @@ public class Server : Node
 
 	}
 
-	// Called when a client connects
-	public void _OnPlayerConnected(int peerId)
+	
+	public void Load_database(string path_to_database_file){
+		using (StreamReader reader = new StreamReader(path_to_database_file))
 	{
-		
-		GD.Print($"Player with peer ID {peerId} connected.");
-
-		// Initialize player data
-		PlayerData player = new PlayerData(peerId);
-		connectedPlayers.Add(peerId, player);
-
-		// Notify other players
-		Rpc("NotifyPlayerJoined", peerId);
+		string fileContent = reader.ReadToEnd();
+		database = JObject.Parse(fileContent);
+	}
 	}
 
-	// Called when a client disconnects
-	public void _OnPlayerDisconnected(int peerId)
-	{
-		
-		GD.Print($"Player with peer ID {peerId} disconnected.");
+	private void Authenticate_Player(PacketPeerUDP peer, JObject message){
+		if (message["authenticate_credentials"] is JObject credentials){
+			string user = credentials.Value<string>("user");
+			string password = credentials.Value<string>("password");
 
-		connectedPlayers.Remove(peerId);
+			if (database.ContainsKey(user) && database[user]["password"].ToString() == password){
 
-		// Notify other players
-		Rpc("NotifyPlayerLeft", peerId);
-	}
-	 // Broadcast player position to all clients
-	public void BroadcastPlayerPosition(int peerId, Vector3 newPosition)
-	{
-		RpcUnreliable("UpdatePlayerPosition", peerId, newPosition);
-	}
+				uint token = GD.Randi();
+				JObject response = new JObject
+				{
+					["token"] = token
+				};
 
-	[Remote]
-	public void NotifyPlayerJoined(int peerId)
-	{
-		GD.Print($"Player {peerId} has joined the game.");
-	}
+				loggedUsers[user]= (int)token;
 
-	[Remote]
-	public void NotifyPlayerLeft(int peerId)
-	{
-		GD.Print($"Player {peerId} has left the game.");
-	}
-
-	[Remote]
-	public void UpdatePlayerPosition(int peerId, Vector3 newPosition)
-	{
-		// Handle the player movement update on the client-side
-		if (connectedPlayers.ContainsKey(peerId))
-		{
-			connectedPlayers[peerId].Position = newPosition;
+				peer.PutVar(response.ToString());
+				
+			}
 		}
 	}
-	
 
+	private void GetAvatar(PacketPeerUDP peer, JObject message){
+		 if (message.ContainsKey("user"))
+		{
+			string user = (string)message["user"];
+
+			// Validate user token
+			if (loggedUsers.ContainsKey(user) && message["token"] == loggedUsers[user])
+			{
+				// Retrieve avatar and nickname from the database
+				string avatar = (string)database[user]["avatar"];
+				string nickname = (string)database[user]["name"];
+
+				// Create response dictionary
+				var response = new JObject
+				{
+					["avatar"] = avatar,
+					["name"] = nickname
+				};
+
+				// Send response back to client
+				peer.PutVar(response.ToString());
+			}
+			else
+			{
+				GD.Print("Invalid token for user.");
+				peer.PutVar(""); // Optional: send an empty or error response
+			}
+		}
+		else
+		{
+			GD.Print("User key missing in message.");
+			peer.PutVar(""); // Optional: send an empty or error response
+		}
+	}
+
+	private void GetAuthenticationToken(PacketPeerUDP peer, JObject message){
+		var credentials = message;
+		if (credentials.ContainsKey("user")){
+			string user = credentials["user"].ToString();
+
+			if (credentials["token"] == loggedUsers[user]){
+				JToken token = loggedUsers[credentials["user"]];
+
+				var response = new JObject{
+					["token"] = token,
+					["user"] = user
+				};
+				peer.PutVar(JsonConvert.SerializeObject(token));
+			}
+		}
+	}
 }

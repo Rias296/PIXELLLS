@@ -1,48 +1,136 @@
 using Godot;
+using Newtonsoft.Json.Linq;
 using System;
+using System.Threading.Tasks;
+
 
 public class LoginScreen : Control
+
 {
-    private Label errorLabel;
-    private Button loginButton;
-    private LineEdit userLineEdit;
-    private LineEdit passwordLineEdit;
-    public override void _Ready()
-    {
-        userLineEdit = GetNode<LineEdit>("UserLineEdit");
-        passwordLineEdit = GetNode<LineEdit>("PasswordLineEdit");
-        errorLabel = GetNode<Label>("ErrorLabel");
-        loginButton = GetNode<Button>("LoginButton");
+	private Label errorLabel;
+	private Button loginButton;
+	private LineEdit userLineEdit;
+	private LineEdit passwordLineEdit;
+	public override void _Ready()
+	{
+		userLineEdit = GetNode<LineEdit>("UserLineEdit");
+		passwordLineEdit = GetNode<LineEdit>("PasswordLineEdit");
+		errorLabel = GetNode<Label>("ErrorLabel");
+		loginButton = GetNode<Button>("LoginButton");
 
-        loginButton.Connect("pressed", this, nameof(OnLoginButtonPressed));
-    }
+		errorLabel.Text = "Insert Username and Password";
+		userLineEdit.GrabFocus();
+		
+		OnLoginButtonPressed();
+		
 
-    private void OnLoginButtonPressed(){
-        send_credentials();
-    }
+	}
 
-    public void send_credentials(){
-        //create message with user credentials
-        var message = new Godot.Collections.Dictionary
-        {
-            { "authenticate_credentials", new Godot.Collections.Dictionary
-            {
-                {"user", userLineEdit.Text},
-                {"password", passwordLineEdit.Text}
-            }}
+	private void OnPasswordLineEditEntered(String new_text)
+	{
+	
+		if (!string.IsNullOrEmpty(userLineEdit.Text))
+		{
+			Send_credentials();
+		}
+		else
+		{
+			errorLabel.Text = "Insert password";
+			userLineEdit.GrabFocus();
+		}
+	}
 
-        };
 
-        //Create UDP Packet
-        PacketPeerUDP packet = new PacketPeerUDP();
-        Error err = packet.ConnectToHost(Multiplayer_Constants.IP_ADDRESS,Multiplayer_Constants.PORT);
-        
+	private void OnUserLineEditEntered(String new_text)
+	{
+		if (!string.IsNullOrEmpty(passwordLineEdit.Text))
+		{
+			GD.Print("Send Credentials made");
+			Send_credentials();
+		}
+		else
+		{
+			errorLabel.Text = "Insert username";
+			passwordLineEdit.GrabFocus();
+		}
+	}
+	private void OnLoginButtonPressed()
+	{
+	if (userLineEdit.Text == ""){
+			errorLabel.Text = "Insert Username";
+			userLineEdit.GrabFocus();
+			
+		}
+	if (passwordLineEdit.Text == ""){
+		errorLabel.Text = "Insert Password";
+		passwordLineEdit.GrabFocus();
+	}else{
+		Send_credentials();
+	}
+		
+	}
+	public async void Send_credentials(){
+		 // Creating a message with user credentials
+		
+		
+			var message = new JObject
+		{
+			["authenticate_credentials"] = new JObject
+			{
+				["user"] = userLineEdit.Text,
+				["password"] = passwordLineEdit.Text
+			}
+		};
 
-    }
+		// Creating and connecting PacketPeerUDP
+		GD.Print("packet class made");
+		PacketPeerUDP packet = new PacketPeerUDP();
+		Error connectResult = packet.ConnectToHost(Multiplayer_Constants.IP_ADDRESS, Multiplayer_Constants.PORT);
+		
+		if (connectResult != Error.Ok)
+		{
+			errorLabel.Text = "Failed to connect to the server.";
+			GD.Print("Issue with host connection");
+			return;
+		}
 
-//  // Called every frame. 'delta' is the elapsed time since the previous frame.
- public override void _Process(float delta)
- {
-     
- }
-}
+		packet.PutVar(message.ToString());
+		GD.Print("before while loop");
+		//WAIT FOR SERVER response
+		 while (packet.Wait() == Error.Ok)	// issue with output of packet.wait()
+		{	
+			
+			GD.Print("responseJSON made");
+			string responseJson = packet.GetVar() as string;
+			var response = JObject.Parse(responseJson);
+			
+			//check if response has a token
+			if(response.ContainsKey("token"))
+			{
+				GD.Print("have token");
+				
+				//store token and user credentials
+				AuthenticationCredentials.user = (string)message["authenticate_credentials"]["user"];
+				AuthenticationCredentials.SessionToken = (string)response["token"];
+			
+				errorLabel.Text = "Logged in!";
+
+				GetTree().ChangeScene("res://Scenes/Main Menu/AvatarScreen.tscn");
+				break;
+			}else{
+				errorLabel.Text = "login failed, check credentials";
+				break;
+			}
+
+			
+		}
+		}
+		
+	}
+
+
+
+
+
+
+

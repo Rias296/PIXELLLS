@@ -1,0 +1,12 @@
+{
+    "user1": {
+      "password":"test",
+      "avatar":"res://Assets/Assassin/Assassin-Idle Sheet.png",
+      "name":"Sakaki"
+    },
+    "user2": {
+      "password":"test",
+      "avatar":"res://Assets/Assassin/Assassin-Idle Sheet.png",
+      "name":"Keyaki"
+    }
+  }

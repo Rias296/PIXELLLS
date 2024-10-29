@@ -27,11 +27,16 @@ config/icon="res://Assets/Assassin/Assassin.png"
 [autoload]
 
 AuthenticationCredentials="*res://src/Tools/Multiplayer/AuthenticationCredentials.cs"
+MultirunInstanceSetup="*res://addons/multirun/instance_setup.gd"
 
 [editor]
 
 version_control_autoload_on_startup=true
 version_control_plugin_name="GitAPI"
+
+[editor_plugins]
+
+enabled=PoolStringArray( "res://addons/multirun/plugin.cfg" )
 
 [gui]
 
@@ -40,6 +45,45 @@ common/drop_mouse_on_gui_input_disabled=true
 [mono]
 
 project/assembly_name="PIXELLLS"
+
+[multirun]
+
+settings/number_of_windows=4
+settings/distance_between_window=0
+settings/individual_instance_args={
+}
+shortcuts/user_dir={
+"alt": false,
+"command": false,
+"control": true,
+"meta": false,
+"scancode": 16777252,
+"shift": false
+}
+shortcuts/run={
+"alt": false,
+"command": false,
+"control": true,
+"meta": false,
+"scancode": 16777248,
+"shift": false
+}
+shortcuts/run_instance={
+"alt": false,
+"command": false,
+"control": true,
+"meta": false,
+"scancode": 16777250,
+"shift": false
+}
+shortcuts/stop={
+"alt": false,
+"command": false,
+"control": true,
+"meta": false,
+"scancode": 16777251,
+"shift": false
+}
 
 [physics]
 
