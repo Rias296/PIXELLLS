@@ -21,7 +21,6 @@ public class LoginScreen : Control
 		errorLabel.Text = "Insert Username and Password";
 		userLineEdit.GrabFocus();
 		
-		OnLoginButtonPressed();
 		
 
 	}
@@ -69,11 +68,12 @@ public class LoginScreen : Control
 	}
 		
 	}
-	public async void Send_credentials(){
-		 // Creating a message with user credentials
-		
-		
-			var message = new JObject
+	public async void Send_credentials()
+	{
+		// Creating a message with user credentials
+
+
+		var message = new JObject
 		{
 			["authenticate_credentials"] = new JObject
 			{
@@ -86,7 +86,7 @@ public class LoginScreen : Control
 		GD.Print("packet class made");
 		PacketPeerUDP packet = new PacketPeerUDP();
 		Error connectResult = packet.ConnectToHost(Multiplayer_Constants.IP_ADDRESS, Multiplayer_Constants.PORT);
-		
+
 		if (connectResult != Error.Ok)
 		{
 			errorLabel.Text = "Failed to connect to the server.";
@@ -97,36 +97,42 @@ public class LoginScreen : Control
 		packet.PutVar(message.ToString());
 		GD.Print("before while loop");
 		//WAIT FOR SERVER response
-		 while (packet.Wait() == Error.Ok)	// issue with output of packet.wait()
-		{	
-			
+		for (int i =0;i<5;i++){
+			if (packet.GetAvailablePacketCount() > 0){  //No response from this. Possibly server not even connected
 			GD.Print("responseJSON made");
 			string responseJson = packet.GetVar() as string;
 			var response = JObject.Parse(responseJson);
-			
+
 			//check if response has a token
-			if(response.ContainsKey("token"))
+			if (response.ContainsKey("token"))
 			{
 				GD.Print("have token");
-				
+
 				//store token and user credentials
 				AuthenticationCredentials.user = (string)message["authenticate_credentials"]["user"];
 				AuthenticationCredentials.SessionToken = (string)response["token"];
-			
+
 				errorLabel.Text = "Logged in!";
 
 				GetTree().ChangeScene("res://Scenes/Main Menu/AvatarScreen.tscn");
-				break;
-			}else{
-				errorLabel.Text = "login failed, check credentials";
-				break;
+				return;
 			}
+			else
+			{
+				errorLabel.Text = "login failed, check credentials";
+				
+			}
+		 } 
+		 // Wait asynchronously for the response
+		await ToSignal(GetTree().CreateTimer(0.5f), "timeout");  // Allow some delay for response
+		}
+		 errorLabel.Text = "No response from server";	//this gets activated
 
-			
-		}
-		}
-		
+		 
+
 	}
+
+}
 
 
 

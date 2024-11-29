@@ -1,7 +1,8 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://src/Tools/Character.cs" type="Script" id=1]
 [ext_resource path="res://Assets/Assassin/Assassin.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Player/Idle/Idle-anim-0.png" type="Texture" id=3]
 [ext_resource path="res://Assets/Assassin/Assassin-Idle Sheet.png" type="Texture" id=4]
 
 [sub_resource type="AtlasTexture" id=3]
@@ -28,11 +29,46 @@ region = Rect2( 32, 32, 32, 32 )
 atlas = ExtResource( 4 )
 region = Rect2( 64, 32, 32, 32 )
 
+[sub_resource type="AtlasTexture" id=10]
+flags = 4
+atlas = ExtResource( 3 )
+region = Rect2( 0, 0, 1024, 1024 )
+
+[sub_resource type="AtlasTexture" id=11]
+flags = 4
+atlas = ExtResource( 3 )
+region = Rect2( 1024, 0, 1024, 1024 )
+
+[sub_resource type="AtlasTexture" id=12]
+flags = 4
+atlas = ExtResource( 3 )
+region = Rect2( 0, 1024, 1024, 1024 )
+
+[sub_resource type="AtlasTexture" id=13]
+flags = 4
+atlas = ExtResource( 3 )
+region = Rect2( 1024, 1024, 1024, 1024 )
+
+[sub_resource type="AtlasTexture" id=14]
+flags = 4
+atlas = ExtResource( 3 )
+region = Rect2( 0, 2048, 1024, 1024 )
+
+[sub_resource type="AtlasTexture" id=15]
+flags = 4
+atlas = ExtResource( 3 )
+region = Rect2( 1024, 2048, 1024, 1024 )
+
 [sub_resource type="SpriteFrames" id=9]
 animations = [ {
 "frames": [ SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ) ],
 "loop": true,
 "name": "Idle",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ), SubResource( 15 ) ],
+"loop": true,
+"name": "run",
 "speed": 5.0
 } ]
 
@@ -56,10 +92,11 @@ position = Vector2( -234, -188 )
 texture = ExtResource( 2 )
 
 [node name="Character_Animation" type="AnimatedSprite" parent="Pivot"]
+position = Vector2( -1, -1 )
+scale = Vector2( 0.84375, 0.875 )
 frames = SubResource( 9 )
 animation = "Idle"
-frame = 3
 
 [node name="CollisionShape" type="CollisionShape2D" parent="."]
-position = Vector2( -5, 38 )
+position = Vector2( -6, 37 )
 shape = SubResource( 2 )

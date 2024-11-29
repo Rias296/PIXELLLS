@@ -8,24 +8,54 @@ using File = System.IO.File;
 
 public class Server : Node
 {
-	private Dictionary<int, PlayerData> connectedPlayers = new Dictionary<int, PlayerData>();
+	
 	private UDPServer server = new UDPServer();
 	private JObject database = new JObject();
 	private JObject loggedUsers = new JObject();
 	private string database_file_path = "./data/FakeData.json";
 	public override void _Ready()
 	{
-		StartServer(Multiplayer_Constants.PORT);
-		server.Listen((ushort)Multiplayer_Constants.PORT);
+		NetworkedMultiplayerENet EnetServer = new NetworkedMultiplayerENet();
+		EnetServer.CreateServer(Multiplayer_Constants.PORT);
+		GetTree().NetworkPeer = EnetServer;
+		GD.Print(EnetServer);
+		
+
+		   // Connect to MultiplayerAPI signals for player connections/disconnections
+		
+		GD.Print("Server started on port: " + Multiplayer_Constants.PORT);
+
+		GD.Print(GetTree().IsNetworkServer());
+		
+		server.Listen(9999);
 		GD.Print("listening to server port");
-		//_OnPlayerConnected();
+
+		GetTree().Connect("network_peer_connected", this, nameof(OnClientConnected));
+		GetTree().Connect("network_peer_disconnected", this, nameof(OnClientDisconnected));
+	
+
+		
 		Load_database(database_file_path);
 
 	}
 
-	public override void _Process(float delta)
+	 private void OnClientConnected(int id)
 	{
-		server.Poll();
+		GD.Print($"Client {id} connected");
+	}
+
+	private void OnClientDisconnected(int id)
+	{
+		GD.Print($"Client {id} disconnected");
+	}
+
+	public override void _Process(float delta)
+	{	
+		if(server.IsListening()){ //THIS DOESNT GET ACTIVATED
+			GD.Print(server.Poll());
+
+		}
+		
 		if (server.IsConnectionAvailable()){
 			var peer = server.TakeConnection();
 			var message = JObject.Parse((string)peer.GetVar());
@@ -42,23 +72,6 @@ public class Server : Node
 	}
 }
 
-
-
-	//Create server
-	public void StartServer(int port){
-		var peer = new NetworkedMultiplayerENet();
-		peer.CreateServer(port);
-		GetTree().NetworkPeer = peer;
-		GetTree().SetMeta(Multiplayer_Constants.NETWORK_PEER,peer);
-
-		   // Connect to MultiplayerAPI signals for player connections/disconnections
-		
-		GD.Print("Server started on port: " + port);
-
-		GetTree().IsNetworkServer();
-		GetTree().NetworkPeer = null;
-
-	}
 
 	
 	public void Load_database(string path_to_database_file){

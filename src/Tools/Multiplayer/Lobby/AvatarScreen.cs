@@ -37,8 +37,10 @@ public class AvatarScreen: Node{
 	}
 
 
-	private async void RequestAvatar(PacketPeerUDP packet){
-		var request = new JObject{
+	private void RequestAvatar(PacketPeerUDP packet)
+	{
+		var request = new JObject
+		{
 			["get_avatar"] = true,
 			["token"] = AuthenticationCredentials.SessionToken,
 			["user"] = AuthenticationCredentials.user
@@ -46,20 +48,23 @@ public class AvatarScreen: Node{
 
 		packet.PutVar(JsonConvert.SerializeObject(request));
 
-		while (packet.Wait() == Error.Ok){
-		   string responseJSON = packet.GetVar() as string;
-		   if (!string.IsNullOrEmpty(responseJSON)){
-			var data =  JObject.Parse(responseJSON);
+		while (packet.Wait() == Error.Ok)
+		{
+			string responseJSON = packet.GetVar() as string;
+			if (!string.IsNullOrEmpty(responseJSON))
+			{
+				var data = JObject.Parse(responseJSON);
 
-			if (data.ContainsKey("avatar")){
-				var texture = (Texture)GD.Load((string)data["avatar"]);
-				textureRect.Texture = texture;
+				if (data.ContainsKey("avatar"))
+				{
+					var texture = (Texture)GD.Load((string)data["avatar"]);
+					textureRect.Texture = texture;
 
-				// Display name
-				label.Text = (string)data["name"];
-				break;
+					// Display name
+					label.Text = (string)data["name"];
+					break;
+				}
 			}
-		   }
 		}
 	}
 

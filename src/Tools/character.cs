@@ -11,19 +11,12 @@ public class Character : KinematicBody2D
 	private CollisionShape2D _collisionShape;
 	private enum States {IDLE, MOVE};
 	private States current_state = States.IDLE;
-	protected StateMachine _stateMachine;
+	protected CharacterStateMachine _stateMachine;
 
+
+	// MAKE SURE TO INCLUDE ALL ANIMATION IN CHARACTER NODE CLASS ANIMATION
 	public override void _Ready()
 	{
-		// Initialize state machine
-		_stateMachine = new StateMachine();
-
-		// Add states to the state machine
-		_stateMachine.AddState(Character_Constant.CharacterStates.IDLE);
-		_stateMachine.AddState(Character_Constant.CharacterStates.MOVING);
-
-		// Set the default state to Idle
-		_stateMachine.ChangeState(Character_Constant.CharacterStates.IDLE);
 
 		//Set AnimatedSprite to avoid Null Error
 		_animatedSprite = GetNode<AnimatedSprite>("./Pivot/Character_Animation");
@@ -31,6 +24,18 @@ public class Character : KinematicBody2D
 		{
 			GD.PrintErr("AnimatedSprite not found!");
 		}
+
+		// Initialize state machine 
+		_stateMachine = new CharacterStateMachine();
+
+		// Add states to the state machine
+		_stateMachine.AddState(Character_Constant.CharacterStates.IDLE, () => _animatedSprite.Play("Idle"));
+		_stateMachine.AddState(Character_Constant.CharacterStates.MOVING, () => _animatedSprite.Play("run"));
+
+		// Set the default state to Idle
+		_stateMachine.ChangeState(Character_Constant.CharacterStates.MOVING);
+
+		
 	}
 
 	public override void _PhysicsProcess(float delta)
@@ -54,16 +59,22 @@ public class Character : KinematicBody2D
 		{
 			GD.Print("State changed to moving");
 			_stateMachine.ChangeState(Character_Constant.CharacterStates.MOVING);
+			// GD.Print(current_state);
 		}
+		current_state = (States)_stateMachine.GetCurrentState();
 	}
 
 	private void UpdateAnimation(){
 		switch(current_state){
 			case States.IDLE:
+				_animatedSprite.Playing = true;
 				_animatedSprite.Play("Idle");
+				GD.Print("idle");
 				break;
 			case States.MOVE:
+				_animatedSprite.Playing = true;
 				_animatedSprite.Play("run");
+				GD.Print("running");
 				break;
 
 		}

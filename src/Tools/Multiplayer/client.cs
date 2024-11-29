@@ -4,57 +4,41 @@ using Godot;
 public class Client :Node
 {
 	private NetworkedMultiplayerENet peer;
+	private bool isConnected = false;
 
 	public override void _Ready()
 	{	
-		ConnectToServer();
-	}
-
-	private void ConnectToServer()
-	{
+		// Initialize and connect the peer
 		peer = new NetworkedMultiplayerENet();
-		
-		Error connectionResult = peer.CreateClient(Multiplayer_Constants.IP_ADDRESS, Multiplayer_Constants.PORT);
-		if (connectionResult != Error.Ok)
-		{
-			GD.PrintErr($"Unable to connect to the server on port {Multiplayer_Constants.PORT}. Error: {connectionResult}");
-			return;
-		}
-
-		// Set the network peer directly on the SceneTree
+		peer.CreateClient(Multiplayer_Constants.IP_ADDRESS, Multiplayer_Constants.PORT);
 		GetTree().NetworkPeer = peer;
-		
-		// Connect to the server connection signal
-		
-		if (GetTree().Connect("connected_to_server", this, nameof(OnConnectedToServer)) == Error.Ok){
-			GD.Print("Successfully connected");
-			GetTree().ChangeScene("res://Scenes/Main Menu/LoginScreen.tscn");
-		}else{
-			GD.Print("Did not connect");
-		}
 
+		GD.Print(peer);
 		GD.Print("Client started and attempting to connect...");
-	}
-
-	private void OnConnectedToServer()
-	{
-		GD.Print("Successfully connected to server!");
-		// Activate login screen or change scenes here
 		
 	}
 
-	 public override void _ExitTree()
+public override void _Process(float delta)
 	{
-		if (peer != null)
+		// Check if connected by verifying if network peer is set and unique ID is valid
+		if (GetTree().NetworkPeer != null && GetTree().GetNetworkUniqueId() != 1 && !isConnected)
 		{
-			peer.CloseConnection();
-			peer = null;
-			GD.Print("Client did not connect to server");
+			isConnected = true;
+			GD.Print("Successfully connected to the server.");
+			// Start any connection-specific tasks here
+			GetTree().ChangeScene("res://Scenes/Main Menu/LoginScreen.tscn");
 		}
+		else if (GetTree().NetworkPeer == null && isConnected)
+		{
+			isConnected = false;
+			GD.Print("Disconnected from server.");
+			// Handle disconnection events here
+		}
+	}
 	}
 
 
 
 
 
-}
+
