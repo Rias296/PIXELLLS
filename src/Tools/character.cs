@@ -12,6 +12,7 @@ public class Character : KinematicBody2D
 	private enum States {IDLE, MOVE};
 	private States current_state = States.IDLE;
 	protected CharacterStateMachine _stateMachine;
+	private AnimationPlayer _animationplayer;
 
 
 	// MAKE SURE TO INCLUDE ALL ANIMATION IN CHARACTER NODE CLASS ANIMATION
@@ -63,10 +64,11 @@ public class Character : KinematicBody2D
 		}
 		current_state = (States)_stateMachine.GetCurrentState();
 	}
-
+// make registry, using dict
 	private void UpdateAnimation(){
 		switch(current_state){
 			case States.IDLE:
+				_animationplayer.Play("Idle"); // try using this instead of animatedsprite
 				_animatedSprite.Playing = true;
 				_animatedSprite.Play("Idle");
 				GD.Print("idle");

@@ -1,0 +1,40 @@
+[gd_scene load_steps=10 format=2]
+
+[sub_resource type="AnimationNodeBlendSpace2D" id=1]
+
+[sub_resource type="AnimationNodeBlendSpace2D" id=2]
+
+[sub_resource type="AnimationNodeBlendSpace2D" id=3]
+
+[sub_resource type="AnimationNodeBlendSpace2D" id=4]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=5]
+switch_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=6]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=7]
+
+[sub_resource type="AnimationNodeStateMachine" id=8]
+states/End/node = SubResource( 1 )
+states/End/position = Vector2( 647.8, 106.904 )
+states/Idle/node = SubResource( 2 )
+states/Idle/position = Vector2( 311.8, 107.04 )
+states/Moving/node = SubResource( 3 )
+states/Moving/position = Vector2( 485.4, 105.464 )
+states/Start/node = SubResource( 4 )
+states/Start/position = Vector2( 191, 104.6 )
+transitions = [ "Idle", "Moving", SubResource( 5 ), "Moving", "Idle", SubResource( 6 ), "Start", "Idle", SubResource( 7 ) ]
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=9]
+
+[node name="PlayerAnimationController" type="AnimationTree"]
+tree_root = SubResource( 8 )
+anim_player = NodePath("AnimationPlayer")
+parameters/playback = SubResource( 9 )
+parameters/End/blend_position = Vector2( 0, 0 )
+parameters/Idle/blend_position = Vector2( 0, 0 )
+parameters/Moving/blend_position = Vector2( 0, 0 )
+parameters/Start/blend_position = Vector2( 0, 0 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
