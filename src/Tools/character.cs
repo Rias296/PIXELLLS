@@ -12,20 +12,12 @@ public class Character : KinematicBody2D
 	public enum States {IDLE, MOVE};
 	public static States current_state = States.IDLE;
 	protected CharacterStateMachine _stateMachine;
-	private AnimationPlayer _animationplayer;
+
 
 
 	// MAKE SURE TO INCLUDE ALL ANIMATION IN CHARACTER NODE CLASS ANIMATION
 	public override void _Ready()
 	{
-
-		//Set AnimatedSprite to avoid Null Error
-		_animatedSprite = GetNode<AnimatedSprite>("./Pivot/Character_Animation");
-		_animationplayer = GetNode<AnimationPlayer>("./CharAnimationPlayer");
-		if (_animatedSprite == null)
-		{
-			GD.PrintErr("AnimatedSprite not found!");
-		}
 
 		// Initialize state machine 
 		_stateMachine = new CharacterStateMachine();
@@ -35,7 +27,7 @@ public class Character : KinematicBody2D
 		_stateMachine.AddState(Character_Constant.CharacterStates.MOVING);
 
 		// Set the default state to Idle
-		_stateMachine.ChangeState(Character_Constant.CharacterStates.MOVING);
+		_stateMachine.ChangeState(Character_Constant.CharacterStates.IDLE);
 
 		
 	}
@@ -44,9 +36,7 @@ public class Character : KinematicBody2D
 	{
 		
 		UpdateState();
-		UpdateAnimation();
-		
-		GD.Print(_stateMachine);
+	
 	}
 
 	private void UpdateState(){
@@ -66,23 +56,7 @@ public class Character : KinematicBody2D
 		current_state = (States)_stateMachine.GetCurrentState();
 	}
 // make registry, using dict
-	private void UpdateAnimation(){
-		switch(current_state){
-			case States.IDLE:
-				_animationplayer.Play("Idle"); // try using this instead of animatedsprite
-				_animatedSprite.Playing = true;
-				_animatedSprite.Play("Idle");
-				GD.Print("idle");
-				break;
-			case States.MOVE:
-				_animatedSprite.Playing = true;
-				_animatedSprite.Play("run");
-				GD.Print("running");
-				break;
-
-		}
-	}
-
+	
 
 	
    public bool IsIdle()

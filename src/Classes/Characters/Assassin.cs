@@ -11,6 +11,11 @@ public class Assassin : Character
 	{
 		base._Ready();  // Call the Character's _Ready method to initialize nodes
 		_animatedSprite = GetNode<AnimatedSprite>("./Pivot/Character_Animation");
+		if (_animatedSprite == null)
+		{
+			GD.PrintErr("AnimatedSprite not found!");
+		}
+
 	}
 
 	
@@ -47,12 +52,15 @@ public class Assassin : Character
 	{
 		//Calls the base node of Character Class
 		base._PhysicsProcess(delta);
-
+		GD.Print("phase 1");
 		GetInput(delta);  // Handle specific player input
 		
 		_velocity = MoveAndSlide(_velocity * Character_Constant.MOVEMENT_SPEED);
-		UpdateAnimation();
+		
 		UpdateHorizontalDirection();
+		GD.Print("phase 2");
+		UpdateAnimation();
+		GD.Print("phase 3");
 	}
 
 		private void UpdateHorizontalDirection(){
@@ -67,12 +75,12 @@ public class Assassin : Character
 		switch(current_state){
 			case States.IDLE:
 				_animatedSprite.Playing = true;
-				_animatedSprite.Play("Idle");
+				_animatedSprite.Play("PlayerIdle");
 				GD.Print("idle");
 				break;
 			case States.MOVE:
 				_animatedSprite.Playing = true;
-				_animatedSprite.Play("run");
+				_animatedSprite.Play("PlayerRun");
 				GD.Print("running");
 				break;
 
