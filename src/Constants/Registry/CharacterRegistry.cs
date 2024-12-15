@@ -1,9 +1,9 @@
 using Godot;
 using System.Collections.Generic;
 
-public class Registry : Node
+public class CharacterRegistry : Node
 {
-    public static Registry Instance { get; private set; }
+    public static CharacterRegistry Instance { get; private set; }
 
     // Example: Animation resources keyed by character type and animation name
     public Dictionary<string, Dictionary<string, string>> CharacterAnimations { get; private set; }

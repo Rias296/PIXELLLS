@@ -51,6 +51,7 @@ public class Assassin : Character
 		GetInput(delta);  // Handle specific player input
 		
 		_velocity = MoveAndSlide(_velocity * Character_Constant.MOVEMENT_SPEED);
+		UpdateAnimation();
 		UpdateHorizontalDirection();
 	}
 
@@ -60,6 +61,21 @@ public class Assassin : Character
 		}
 		if (_velocity.x < 0){
 			_animatedSprite.FlipH = true;
+		}
+	}
+	private void UpdateAnimation(){
+		switch(current_state){
+			case States.IDLE:
+				_animatedSprite.Playing = true;
+				_animatedSprite.Play("Idle");
+				GD.Print("idle");
+				break;
+			case States.MOVE:
+				_animatedSprite.Playing = true;
+				_animatedSprite.Play("run");
+				GD.Print("running");
+				break;
+
 		}
 	}
 

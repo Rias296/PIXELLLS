@@ -21,7 +21,7 @@ _global_script_class_icons={
 [application]
 
 config/name="PIXELLLS"
-run/main_scene="res://Scenes/Main Menu/MainMenu.tscn"
+run/main_scene="res://Scenes/Maps/TestMap.tscn"
 config/icon="res://Assets/Assassin/Assassin.png"
 
 [autoload]
@@ -33,10 +33,6 @@ MultirunInstanceSetup="*res://addons/multirun/instance_setup.gd"
 
 version_control_autoload_on_startup=true
 version_control_plugin_name="GitAPI"
-
-[editor_plugins]
-
-enabled=PoolStringArray( "res://addons/multirun/plugin.cfg" )
 
 [gui]
 

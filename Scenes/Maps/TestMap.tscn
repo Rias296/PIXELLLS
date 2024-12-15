@@ -6,10 +6,18 @@
 [node name="TestMap" type="Node2D"]
 
 [node name="TextureRect" type="TextureRect" parent="."]
-margin_left = -522.0
-margin_top = -670.0
-margin_right = 1078.0
-margin_bottom = 930.0
+margin_left = -559.0
+margin_top = -693.0
+margin_right = 1041.0
+margin_bottom = 907.0
 texture = ExtResource( 2 )
 
+[node name="Collision_UI" type="StaticBody2D" parent="."]
+
+[node name="CollisionGI" type="CollisionPolygon2D" parent="Collision_UI"]
+position = Vector2( -543, -693 )
+build_mode = 1
+polygon = PoolVector2Array( 603, 635, 522, 612, 588, 703 )
+
 [node name="Player" parent="." instance=ExtResource( 1 )]
+position = Vector2( -55, -62 )

@@ -1,0 +1,11 @@
+[gd_scene format=2]
+
+[node name="Stone_Walls" type="Node2D"]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+collision_layer = 3
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+build_mode = 1
+polygon = PoolVector2Array( 3, 2, 0, 0, 10, 2 )
+one_way_collision = true
