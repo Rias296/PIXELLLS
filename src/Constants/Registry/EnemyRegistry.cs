@@ -7,10 +7,13 @@ public enum PersonalityType { Prideful, Slothful, Aggressive, Cowardly, Neutral 
 public class EnemyStats
 {
     public float BaseSpeed;
-    public float VisionRange;         // Vision radius
+    public float RearVisionRange;         // Vision radius
     public float AttackDamage;
     public float SearchDuration;      // How long to search
     public float HP;
+    public float HearingThresholdDb;
+    public float FrontVisionRange;
+    public float VisionAngle;
         // You can add more as needed
 }
 
@@ -20,11 +23,14 @@ public static class EnemyRegistry
     // Base stats for this type of enemy
     public static EnemyStats BaseEnemyStats = new EnemyStats
     {
-        BaseSpeed = 150f,
-        VisionRange = 25f,
+        BaseSpeed = 100f,
+        RearVisionRange = 200f,
+        FrontVisionRange = 300f,
+        VisionAngle = 90f,
         AttackDamage = 10f,
         SearchDuration = 5f,
-        HP = 200f
+        HP = 200f,
+        HearingThresholdDb = 45
     };
 
     // Personality modifiers: each personality changes stats differently
@@ -32,24 +38,24 @@ public static class EnemyRegistry
     {
         { PersonalityType.Prideful, (stats) => {
             stats.AttackDamage *= 1.5f; 
-            stats.VisionRange += 10f; 
+            stats.RearVisionRange += 10f; 
             stats.HP -=3f;
             // Prideful enemies rarely run away, maybe ignore fleeing logic entirely
         }},
         { PersonalityType.Slothful, (stats) => {
-            stats.VisionRange -= 5f; 
+            stats.RearVisionRange -= 5f; 
             stats.BaseSpeed *= 0.8f; 
             stats.HP +=5f;
             // Slothful might flee sooner or never chase aggressively
         }},
         { PersonalityType.Aggressive, (stats) => {
-            stats.VisionRange += 5f;
+            stats.RearVisionRange += 5f;
             stats.BaseSpeed *= 1.2f;
             stats.AttackDamage *= 1.2f;
             stats.HP -=6f;
         }},
         { PersonalityType.Cowardly, (stats) => {
-            stats.VisionRange += 5f;
+            stats.RearVisionRange += 5f;
             stats.BaseSpeed *=1.5f;
             stats.HP +=3f;
             // Cowardly flees at higher HP threshold and moves erratically

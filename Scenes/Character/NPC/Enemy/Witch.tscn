@@ -1,13 +1,17 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://Scenes/Character/Character.tscn" type="PackedScene" id=1]
+[ext_resource path="res://src/Classes/Characters/Enemy.cs" type="Script" id=2]
 
 [node name="Witch" instance=ExtResource( 1 )]
+script = ExtResource( 2 )
 
-[node name="Assassin_Image" parent="Pivot" index="0"]
-visible = false
+[node name="Character_Animation" parent="Pivot" index="0"]
+animation = "WitchIdle"
 
-[node name="Character_Animation" parent="Pivot" index="1"]
-visible = true
-animation = "PlayerIdle"
-frame = 4
+[node name="RayCast2D" type="RayCast2D" parent="." index="3"]
+position = Vector2( -4, 40 )
+cast_to = Vector2( 109, 140 )
+
+[node name="Navigation2D" type="Navigation2D" parent="." index="4"]
+position = Vector2( -4, 40 )

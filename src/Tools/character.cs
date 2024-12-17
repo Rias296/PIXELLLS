@@ -4,13 +4,13 @@ using System.Text.RegularExpressions;
 
 public class Character : KinematicBody2D
 {
-	protected Vector2 _velocity = new Vector2();
+	protected Vector2 _velocity = Vector2.Zero;
 
 
 	private AnimatedSprite _animatedSprite;
 	private CollisionShape2D _collisionShape;
 	public enum States {IDLE, MOVE};
-	public static States current_state = States.IDLE;
+	public States current_state = States.IDLE;
 	protected CharacterStateMachine _stateMachine;
 
 
@@ -26,8 +26,7 @@ public class Character : KinematicBody2D
 		_stateMachine.AddState(Character_Constant.CharacterStates.IDLE);
 		_stateMachine.AddState(Character_Constant.CharacterStates.MOVING);
 
-		// Set the default state to Idle
-		_stateMachine.ChangeState(Character_Constant.CharacterStates.IDLE);
+		
 
 		
 	}
@@ -39,7 +38,7 @@ public class Character : KinematicBody2D
 	
 	}
 
-	private void UpdateState(){
+	protected virtual void UpdateState(){
 
 		// If character is not moving, set state to Idle
 		if (_velocity.Length() == 0)

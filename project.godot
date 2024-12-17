@@ -28,6 +28,7 @@ config/icon="res://Assets/Assassin/Assassin.png"
 
 AuthenticationCredentials="*res://src/Tools/Multiplayer/AuthenticationCredentials.cs"
 MultirunInstanceSetup="*res://addons/multirun/instance_setup.gd"
+SoundManager="*res://src/Tools/SounManager/SoundManager.cs"
 
 [editor]
 

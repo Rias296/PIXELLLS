@@ -1,9 +1,10 @@
-[gd_scene load_steps=31 format=2]
+[gd_scene load_steps=40 format=2]
 
 [ext_resource path="res://src/Tools/Character.cs" type="Script" id=1]
 [ext_resource path="res://Assets/Assassin/Assassin-Idle Sheet.png" type="Texture" id=2]
 [ext_resource path="res://Assets/Player/WalkingRight/Walking_Right-anims.png" type="Texture" id=3]
 [ext_resource path="res://Assets/Boss/Witch/Sprites/Idle.png" type="Texture" id=4]
+[ext_resource path="res://Assets/Boss/Witch/Sprites/Walk.png" type="Texture" id=5]
 
 [sub_resource type="AtlasTexture" id=28]
 atlas = ExtResource( 2 )
@@ -119,6 +120,46 @@ flags = 4
 atlas = ExtResource( 4 )
 region = Rect2( 1260, 0, 140, 140 )
 
+[sub_resource type="AtlasTexture" id=42]
+flags = 4
+atlas = ExtResource( 5 )
+region = Rect2( 0, 0, 140, 140 )
+
+[sub_resource type="AtlasTexture" id=43]
+flags = 4
+atlas = ExtResource( 5 )
+region = Rect2( 140, 0, 140, 140 )
+
+[sub_resource type="AtlasTexture" id=44]
+flags = 4
+atlas = ExtResource( 5 )
+region = Rect2( 280, 0, 140, 140 )
+
+[sub_resource type="AtlasTexture" id=45]
+flags = 4
+atlas = ExtResource( 5 )
+region = Rect2( 420, 0, 140, 140 )
+
+[sub_resource type="AtlasTexture" id=46]
+flags = 4
+atlas = ExtResource( 5 )
+region = Rect2( 560, 0, 140, 140 )
+
+[sub_resource type="AtlasTexture" id=47]
+flags = 4
+atlas = ExtResource( 5 )
+region = Rect2( 700, 0, 140, 140 )
+
+[sub_resource type="AtlasTexture" id=48]
+flags = 4
+atlas = ExtResource( 5 )
+region = Rect2( 840, 0, 140, 140 )
+
+[sub_resource type="AtlasTexture" id=49]
+flags = 4
+atlas = ExtResource( 5 )
+region = Rect2( 980, 0, 140, 140 )
+
 [sub_resource type="SpriteFrames" id=9]
 animations = [ {
 "frames": [ SubResource( 28 ), SubResource( 29 ), SubResource( 30 ), SubResource( 31 ), SubResource( 32 ), SubResource( 33 ) ],
@@ -135,6 +176,11 @@ animations = [ {
 "loop": true,
 "name": "WitchIdle",
 "speed": 5.0
+}, {
+"frames": [ SubResource( 42 ), SubResource( 43 ), SubResource( 44 ), SubResource( 45 ), SubResource( 46 ), SubResource( 47 ), SubResource( 48 ), SubResource( 49 ) ],
+"loop": true,
+"name": "WitchRun",
+"speed": 5.0
 } ]
 
 [sub_resource type="CircleShape2D" id=2]
@@ -149,18 +195,12 @@ script = ExtResource( 1 )
 [node name="Pivot" type="Position2D" parent="."]
 position = Vector2( -6, 38 )
 
-[node name="Assassin_Image" type="Sprite" parent="Pivot"]
-visible = false
-position = Vector2( -2, 0 )
-texture = ExtResource( 2 )
-hframes = 3
-vframes = 2
-
 [node name="Character_Animation" type="AnimatedSprite" parent="Pivot"]
 position = Vector2( -1, -1 )
 scale = Vector2( 0.84375, 0.875 )
 frames = SubResource( 9 )
-animation = "PlayerRun"
+animation = "WitchRun"
+playing = true
 
 [node name="CollisionShape" type="CollisionShape2D" parent="."]
 position = Vector2( -6, 37 )
