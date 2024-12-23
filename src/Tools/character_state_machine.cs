@@ -25,7 +25,7 @@ public class CharacterStateMachine
 		if (_currentState != newState)
 	{
 		_currentState = newState; // Update the current state
-		GD.Print("State changed to: " + _currentState); // Print the new state for debugging
+		// GD.Print("State changed to: " + _currentState); // Print the new state for debugging
 
 		if (_states.TryGetValue(newState, out Action onEnterState) && onEnterState != null){
 			onEnterState();

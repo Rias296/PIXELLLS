@@ -1,8 +1,8 @@
-[gd_scene load_steps=40 format=2]
+[gd_scene load_steps=36 format=2]
 
 [ext_resource path="res://src/Tools/Character.cs" type="Script" id=1]
 [ext_resource path="res://Assets/Assassin/Assassin-Idle Sheet.png" type="Texture" id=2]
-[ext_resource path="res://Assets/Player/WalkingRight/Walking_Right-anims.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Boss/Witch/Sprites/Projectile/Moving.png" type="Texture" id=3]
 [ext_resource path="res://Assets/Boss/Witch/Sprites/Idle.png" type="Texture" id=4]
 [ext_resource path="res://Assets/Boss/Witch/Sprites/Walk.png" type="Texture" id=5]
 
@@ -30,45 +30,25 @@ region = Rect2( 32, 32, 32, 32 )
 atlas = ExtResource( 2 )
 region = Rect2( 64, 32, 32, 32 )
 
-[sub_resource type="AtlasTexture" id=34]
+[sub_resource type="AtlasTexture" id=50]
 flags = 4
 atlas = ExtResource( 3 )
-region = Rect2( 0, 0, 1024, 1024 )
+region = Rect2( 0, 0, 50, 50 )
 
-[sub_resource type="AtlasTexture" id=35]
+[sub_resource type="AtlasTexture" id=51]
 flags = 4
 atlas = ExtResource( 3 )
-region = Rect2( 1024, 0, 1024, 1024 )
+region = Rect2( 50, 0, 50, 50 )
 
-[sub_resource type="AtlasTexture" id=36]
+[sub_resource type="AtlasTexture" id=52]
 flags = 4
 atlas = ExtResource( 3 )
-region = Rect2( 2048, 0, 1024, 1024 )
+region = Rect2( 100, 0, 50, 50 )
 
-[sub_resource type="AtlasTexture" id=37]
+[sub_resource type="AtlasTexture" id=53]
 flags = 4
 atlas = ExtResource( 3 )
-region = Rect2( 3072, 0, 1024, 1024 )
-
-[sub_resource type="AtlasTexture" id=38]
-flags = 4
-atlas = ExtResource( 3 )
-region = Rect2( 0, 1024, 1024, 1024 )
-
-[sub_resource type="AtlasTexture" id=39]
-flags = 4
-atlas = ExtResource( 3 )
-region = Rect2( 1024, 1024, 1024, 1024 )
-
-[sub_resource type="AtlasTexture" id=40]
-flags = 4
-atlas = ExtResource( 3 )
-region = Rect2( 2048, 1024, 1024, 1024 )
-
-[sub_resource type="AtlasTexture" id=41]
-flags = 4
-atlas = ExtResource( 3 )
-region = Rect2( 3072, 1024, 1024, 1024 )
+region = Rect2( 150, 0, 50, 50 )
 
 [sub_resource type="AtlasTexture" id=16]
 flags = 4
@@ -160,14 +140,14 @@ flags = 4
 atlas = ExtResource( 5 )
 region = Rect2( 980, 0, 140, 140 )
 
-[sub_resource type="SpriteFrames" id=9]
+[sub_resource type="SpriteFrames" id=54]
 animations = [ {
 "frames": [ SubResource( 28 ), SubResource( 29 ), SubResource( 30 ), SubResource( 31 ), SubResource( 32 ), SubResource( 33 ) ],
 "loop": true,
 "name": "PlayerIdle",
 "speed": 5.0
 }, {
-"frames": [ SubResource( 34 ), SubResource( 35 ), SubResource( 36 ), SubResource( 37 ), SubResource( 38 ), SubResource( 39 ), SubResource( 40 ), SubResource( 41 ) ],
+"frames": [ SubResource( 50 ), SubResource( 51 ), SubResource( 52 ), SubResource( 53 ) ],
 "loop": true,
 "name": "PlayerRun",
 "speed": 5.0
@@ -196,9 +176,9 @@ script = ExtResource( 1 )
 position = Vector2( -6, 38 )
 
 [node name="Character_Animation" type="AnimatedSprite" parent="Pivot"]
-position = Vector2( -1, -1 )
+position = Vector2( 2, -2 )
 scale = Vector2( 0.84375, 0.875 )
-frames = SubResource( 9 )
+frames = SubResource( 54 )
 animation = "WitchRun"
 playing = true
 

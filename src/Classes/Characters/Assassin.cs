@@ -15,7 +15,7 @@ public class Assassin : Character
 		_stateMachine.ChangeState(Character_Constant.CharacterStates.IDLE);
 		if (_animatedSprite == null)
 		{
-			GD.PrintErr("AnimatedSprite not found!");
+			// GD.PrintErr("AnimatedSprite not found!");
 		}
 		
 
@@ -56,15 +56,15 @@ public class Assassin : Character
 	{
 		//Calls the base node of Character Class
 		base._PhysicsProcess(delta);
-		//GD.Print("phase 1");
+		//// GD.Print("phase 1");
 		GetInput(delta);  // Handle specific player input
 		
 		_velocity = MoveAndSlide(_velocity * Character_Constant.MOVEMENT_SPEED);
 		
 		UpdateHorizontalDirection();
-		//GD.Print("phase 2");
+		//// GD.Print("phase 2");
 		UpdateAnimation();
-		//GD.Print("phase 3");
+		//// GD.Print("phase 3");
 	}
 
 		private void UpdateHorizontalDirection(){
@@ -99,12 +99,12 @@ public void MakeNoise(float intensity)
 			case States.IDLE:
 				_animatedSprite.Playing = true;
 				_animatedSprite.Play("PlayerIdle");
-				//GD.Print("player idle");
+				//// GD.Print("player idle");
 				break;
 			case States.MOVE:
 				_animatedSprite.Playing = true;
 				_animatedSprite.Play("PlayerRun");
-				//GD.Print("player running");
+				//// GD.Print("player running");
 				break;
 
 		}

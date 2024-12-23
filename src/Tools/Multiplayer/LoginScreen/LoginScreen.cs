@@ -44,7 +44,7 @@ public class LoginScreen : Control
 	{
 		if (!string.IsNullOrEmpty(passwordLineEdit.Text))
 		{
-			GD.Print("Send Credentials made");
+			// GD.Print("Send Credentials made");
 			Send_credentials();
 		}
 		else
@@ -83,30 +83,30 @@ public class LoginScreen : Control
 		};
 
 		// Creating and connecting PacketPeerUDP
-		GD.Print("packet class made");
+		// GD.Print("packet class made");
 		PacketPeerUDP packet = new PacketPeerUDP();
 		Error connectResult = packet.ConnectToHost(Multiplayer_Constants.IP_ADDRESS, Multiplayer_Constants.PORT);
 
 		if (connectResult != Error.Ok)
 		{
 			errorLabel.Text = "Failed to connect to the server.";
-			GD.Print("Issue with host connection");
+			// GD.Print("Issue with host connection");
 			return;
 		}
 
 		packet.PutVar(message.ToString());
-		GD.Print("before while loop");
+		// GD.Print("before while loop");
 		//WAIT FOR SERVER response
 		for (int i =0;i<5;i++){
 			if (packet.GetAvailablePacketCount() > 0){  //No response from this. Possibly server not even connected
-			GD.Print("responseJSON made");
+			// GD.Print("responseJSON made");
 			string responseJson = packet.GetVar() as string;
 			var response = JObject.Parse(responseJson);
 
 			//check if response has a token
 			if (response.ContainsKey("token"))
 			{
-				GD.Print("have token");
+				// GD.Print("have token");
 
 				//store token and user credentials
 				AuthenticationCredentials.user = (string)message["authenticate_credentials"]["user"];

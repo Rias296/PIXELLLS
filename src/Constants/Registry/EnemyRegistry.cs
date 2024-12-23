@@ -14,6 +14,12 @@ public class EnemyStats
     public float HearingThresholdDb;
     public float FrontVisionRange;
     public float VisionAngle;
+    public float SearchingSpeed;
+    public float patrol_radius;
+    public float _patrolInterval;               // How often to pick a new random point
+    public float _patrolTimer;
+    public float _snapfreeRadius; //Radius to prevent constant chasing
+
         // You can add more as needed
 }
 
@@ -24,13 +30,17 @@ public static class EnemyRegistry
     public static EnemyStats BaseEnemyStats = new EnemyStats
     {
         BaseSpeed = 100f,
+        SearchingSpeed = 80f,
         RearVisionRange = 200f,
         FrontVisionRange = 300f,
         VisionAngle = 90f,
         AttackDamage = 10f,
-        SearchDuration = 5f,
+        SearchDuration = 8f,
         HP = 200f,
-        HearingThresholdDb = 45
+        HearingThresholdDb = 45f,
+        patrol_radius = 250f,
+        _patrolInterval = 3f,
+        _snapfreeRadius = 40f
     };
 
     // Personality modifiers: each personality changes stats differently

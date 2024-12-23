@@ -18,17 +18,17 @@ public class Server : Node
 		NetworkedMultiplayerENet EnetServer = new NetworkedMultiplayerENet();
 		EnetServer.CreateServer(Multiplayer_Constants.PORT);
 		GetTree().NetworkPeer = EnetServer;
-		GD.Print(EnetServer);
+		// GD.Print(EnetServer);
 		
 
 		   // Connect to MultiplayerAPI signals for player connections/disconnections
 		
-		GD.Print("Server started on port: " + Multiplayer_Constants.PORT);
+		// GD.Print("Server started on port: " + Multiplayer_Constants.PORT);
 
-		GD.Print(GetTree().IsNetworkServer());
+		// GD.Print(GetTree().IsNetworkServer());
 		
 		server.Listen(9999);
-		GD.Print("listening to server port");
+		// GD.Print("listening to server port");
 
 		GetTree().Connect("network_peer_connected", this, nameof(OnClientConnected));
 		GetTree().Connect("network_peer_disconnected", this, nameof(OnClientDisconnected));
@@ -41,18 +41,18 @@ public class Server : Node
 
 	 private void OnClientConnected(int id)
 	{
-		GD.Print($"Client {id} connected");
+		// GD.Print($"Client {id} connected");
 	}
 
 	private void OnClientDisconnected(int id)
 	{
-		GD.Print($"Client {id} disconnected");
+		// GD.Print($"Client {id} disconnected");
 	}
 
 	public override void _Process(float delta)
 	{	
 		if(server.IsListening()){ //THIS DOESNT GET ACTIVATED
-			GD.Print(server.Poll());
+			// GD.Print(server.Poll());
 
 		}
 		
@@ -127,13 +127,13 @@ public class Server : Node
 			}
 			else
 			{
-				GD.Print("Invalid token for user.");
+				// GD.Print("Invalid token for user.");
 				peer.PutVar(""); // Optional: send an empty or error response
 			}
 		}
 		else
 		{
-			GD.Print("User key missing in message.");
+			// GD.Print("User key missing in message.");
 			peer.PutVar(""); // Optional: send an empty or error response
 		}
 	}

@@ -1,26 +1,87 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Scenes/Character/Player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Assets/Maps/Farmland-01.png" type="Texture" id=2]
 [ext_resource path="res://Scenes/Character/NPC/Enemy/Witch.tscn" type="PackedScene" id=3]
+[ext_resource path="res://src/Tools/Camera/Camera.cs" type="Script" id=4]
+
+[sub_resource type="TileSet" id=3]
+0/name = "Farmland-01.png 0"
+0/texture = ExtResource( 2 )
+0/tex_offset = Vector2( 0, 0 )
+0/modulate = Color( 1, 1, 1, 1 )
+0/region = Rect2( 0, 0, 896, 352 )
+0/tile_mode = 2
+0/autotile/icon_coordinate = Vector2( 0, 0 )
+0/autotile/tile_size = Vector2( 32, 32 )
+0/autotile/spacing = 0
+0/autotile/occluder_map = [  ]
+0/autotile/navpoly_map = [  ]
+0/autotile/priority_map = [  ]
+0/autotile/z_index_map = [  ]
+0/occluder_offset = Vector2( 0, 0 )
+0/navigation_offset = Vector2( 0, 0 )
+0/shape_offset = Vector2( 0, 0 )
+0/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+0/shape_one_way = false
+0/shape_one_way_margin = 0.0
+0/shapes = [  ]
+0/z_index = 0
+
+[sub_resource type="NavigationPolygon" id=4]
+vertices = PoolVector2Array( 42, 213, -202, 212, -201, 181, -37, -35, 10, -70, 478, 254, 283, 260, 272, -205, 475, -293, 29, -292, 189, -201, 29, -126, 182, 227, 44, 229, -273, 108, -202, 15, -240, 181 )
+polygons = [ PoolIntArray( 0, 1, 2, 3, 4 ), PoolIntArray( 5, 6, 7, 8 ), PoolIntArray( 9, 8, 7, 10 ), PoolIntArray( 11, 9, 10, 12 ), PoolIntArray( 4, 11, 12, 13, 0 ), PoolIntArray( 14, 15, 3, 2, 16 ) ]
+outlines = [ PoolVector2Array( 29, -126, 10, -70, -37, -35, -202, 15, -273, 108, -240, 181, -201, 181, -202, 212, 42, 213, 44, 229, 182, 227, 189, -201, 272, -205, 283, 260, 478, 254, 475, -293, 29, -292 ) ]
+
+[sub_resource type="TileSet" id=2]
 
 [node name="TestMap" type="Node2D"]
 
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = SubResource( 3 )
+format = 1
+
 [node name="TextureRect" type="TextureRect" parent="."]
-margin_left = -559.0
-margin_top = -693.0
-margin_right = 1041.0
-margin_bottom = 907.0
+margin_left = -669.0
+margin_top = -300.0
+margin_right = 931.0
+margin_bottom = 1300.0
 texture = ExtResource( 2 )
 
+[node name="Navigation2D" type="Navigation2D" parent="."]
+
+[node name="NavigationPolygonInstance" type="NavigationPolygonInstance" parent="Navigation2D"]
+navpoly = SubResource( 4 )
+
+[node name="Witch" parent="Navigation2D" instance=ExtResource( 3 )]
+position = Vector2( 70, -124 )
+
+[node name="NavigationAgent2D2" type="NavigationAgent2D" parent="Navigation2D/Witch"]
+
 [node name="Collision_UI" type="StaticBody2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Collision_UI"]
+position = Vector2( -543, -693 )
+build_mode = 1
+polygon = PoolVector2Array( 254, 805, 297, 889, 327, 889, 331, 916, 578, 921, 578, 937, 734, 935, 740, 495, 807, 494, 818, 970, 322, 964, 322, 930, 300, 929, 241, 825 )
 
 [node name="CollisionGI" type="CollisionPolygon2D" parent="Collision_UI"]
 position = Vector2( -543, -693 )
 build_mode = 1
-polygon = PoolVector2Array( 603, 635, 522, 612, 588, 703 )
+polygon = PoolVector2Array( 465, 652, 389, 678, 366, 681, 367, 693, 333, 691, 333, 705, 317, 715, 250, 805, 242, 668, 244, 630, 463, 623, 466, 568, 488, 574, 482, 539, 503, 545, 499, 493, 561, 493, 560, 563, 543, 563, 544, 614, 513, 612, 513, 639, 466, 636, 464, 650, 434, 647, 434, 657 )
+
+[node name="TileMap" type="TileMap" parent="Collision_UI"]
+tile_set = SubResource( 2 )
+show_collision = true
+format = 1
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
 position = Vector2( -55, -62 )
 
-[node name="Witch" parent="." instance=ExtResource( 3 )]
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2( 7, 1 )
+scale = Vector2( 0.568, 0.568 )
+zoom = Vector2( 0.598, 0.598 )
+process_mode = 0
+smoothing_enabled = true
+script = ExtResource( 4 )

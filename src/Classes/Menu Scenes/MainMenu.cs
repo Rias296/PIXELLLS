@@ -12,16 +12,16 @@ public class MainMenu : Control
 	{
 		_clientButton = GetNode<Godot.Button>("ClientButton");
 		_serverButton = GetNode<Godot.Button>("ServerButton");
-		GD.Print(_clientButton.GetType());
+		// GD.Print(_clientButton.GetType());
 
 		_serverButton.GrabFocus();
 
 		if (_clientButton ==null){
-			GD.PrintErr("ClientButton missing or not found");
+			// GD.PrintErr("ClientButton missing or not found");
 		}
 
 		if (_serverButton == null){
-			GD.PrintErr("ServerButton not found");
+			// GD.PrintErr("ServerButton not found");
 		}
 		//_clientButton.Connect("pressed", this, nameof(OnClientButtonPressed));
 		//_serverButton.Connect("pressed", this, nameof(OnServerButtonPressed));
